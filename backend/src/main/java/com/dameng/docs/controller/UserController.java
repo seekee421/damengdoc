@@ -1,7 +1,6 @@
 package com.dameng.docs.controller;
 
 import com.dameng.docs.dto.UserResponse;
-import com.dameng.docs.entity.User;
 import com.dameng.docs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

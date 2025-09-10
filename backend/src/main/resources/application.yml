@@ -10,7 +10,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/damengdb
     username: postgres
-    password: postgres
+    password: 421421
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-pool-name: DamengHikariCP
