@@ -3,6 +3,17 @@ import Layout from '@theme/Layout';
 import SearchBox from '../components/Search/SearchBox';
 import { SearchResult } from '../components/Search/SearchBox';
 import { searchDocuments, getPopularSearches } from '../services/searchService';
+import { 
+  SearchOutlined, 
+  FileTextOutlined, 
+  BookOutlined, 
+  QuestionCircleOutlined, 
+  EditOutlined, 
+  AimOutlined, 
+  ClockCircleOutlined, 
+  FireOutlined, 
+  BulbOutlined 
+} from '@ant-design/icons';
 import styles from './search.module.css';
 
 interface SearchPageProps {
@@ -98,7 +109,7 @@ export default function SearchPage({ location }: SearchPageProps): React.ReactEl
           <div className={styles.container}>
             <div className={styles.headerContent}>
               <h1 className={styles.title}>
-                <span className={styles.titleIcon}>🔍</span>
+                <span className={styles.titleIcon}><SearchOutlined /></span>
                 文档搜索
               </h1>
               <p className={styles.subtitle}>
@@ -150,7 +161,7 @@ export default function SearchPage({ location }: SearchPageProps): React.ReactEl
                     {/* 搜索结果列表 */}
                     {!isLoading && results.length === 0 && (
                       <div className={styles.noResults}>
-                        <div className={styles.noResultsIcon}>📄</div>
+                        <div className={styles.noResultsIcon}><FileTextOutlined /></div>
                         <h3>未找到相关结果</h3>
                         <p>尝试使用不同的关键词或查看下方的热门搜索</p>
                       </div>
@@ -166,10 +177,10 @@ export default function SearchPage({ location }: SearchPageProps): React.ReactEl
                           >
                             <div className={styles.resultHeader}>
                               <div className={styles.resultType}>
-                                {result.type === 'doc' && '📖'}
-                                {result.type === 'faq' && '❓'}
-                                {result.type === 'blog' && '📝'}
-                                {result.type === 'page' && '📄'}
+                                {result.type === 'doc' && <BookOutlined />}
+                {result.type === 'faq' && <QuestionCircleOutlined />}
+                {result.type === 'blog' && <EditOutlined />}
+                {result.type === 'page' && <FileTextOutlined />}
                               </div>
                               <h3 
                                 className={styles.resultTitle}
@@ -210,7 +221,7 @@ export default function SearchPage({ location }: SearchPageProps): React.ReactEl
                 ) : (
                   /* 搜索前的欢迎界面 */
                   <div className={styles.welcomeSection}>
-                    <div className={styles.welcomeIcon}>🎯</div>
+                    <div className={styles.welcomeIcon}><AimOutlined /></div>
                     <h2>开始搜索</h2>
                     <p>在上方搜索框中输入关键词，快速找到您需要的文档内容</p>
                     
@@ -233,7 +244,7 @@ export default function SearchPage({ location }: SearchPageProps): React.ReactEl
                 {searchHistory.length > 0 && (
                   <div className={styles.sidebarCard}>
                     <h4 className={styles.sidebarTitle}>
-                      <span className={styles.sidebarIcon}>🕒</span>
+                      <span className={styles.sidebarIcon}><ClockCircleOutlined /></span>
                       搜索历史
                     </h4>
                     <div className={styles.historyList}>
@@ -253,7 +264,7 @@ export default function SearchPage({ location }: SearchPageProps): React.ReactEl
                 {/* 热门搜索 */}
                 <div className={styles.sidebarCard}>
                   <h4 className={styles.sidebarTitle}>
-                    <span className={styles.sidebarIcon}>🔥</span>
+                    <span className={styles.sidebarIcon}><FireOutlined /></span>
                     热门搜索
                   </h4>
                   <div className={styles.popularList}>
@@ -272,7 +283,7 @@ export default function SearchPage({ location }: SearchPageProps): React.ReactEl
                 {/* 搜索帮助 */}
                 <div className={styles.sidebarCard}>
                   <h4 className={styles.sidebarTitle}>
-                    <span className={styles.sidebarIcon}>💡</span>
+                    <span className={styles.sidebarIcon}><BulbOutlined /></span>
                     搜索帮助
                   </h4>
                   <div className={styles.helpContent}>

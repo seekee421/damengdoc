@@ -1,4 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { 
+  FileTextOutlined, 
+  EditOutlined, 
+  GlobalOutlined, 
+  SearchOutlined, 
+  CloseOutlined, 
+  FolderOutlined 
+} from '@ant-design/icons';
 import styles from './SearchBox.module.css';
 
 export interface SearchResult {
@@ -121,10 +129,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({
   // 获取类型图标
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'doc': return '📄';
-      case 'blog': return '📝';
-      case 'page': return '🌐';
-      default: return '📄';
+      case 'doc': return <FileTextOutlined />;
+    case 'blog': return <EditOutlined />;
+    case 'page': return <GlobalOutlined />;
+    default: return <FileTextOutlined />;
     }
   };
 
@@ -132,7 +140,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
     <div ref={searchRef} className={`${styles.searchBox} ${className}`}>
       <div className={styles.inputContainer}>
         <div className={styles.searchIcon}>
-          🔍
+          <SearchOutlined />
         </div>
         <input
           ref={inputRef}
@@ -160,7 +168,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
             className={styles.clearButton}
             title="清除搜索"
           >
-            ✕
+            <CloseOutlined />
           </button>
         )}
       </div>
@@ -200,7 +208,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
                       {result.category && (
                         <div className={styles.resultMeta}>
                           <span className={styles.category}>
-                            📁 {result.category}
+                            <FolderOutlined /> {result.category}
                           </span>
                           {result.tags && result.tags.length > 0 && (
                             <div className={styles.tags}>
@@ -223,7 +231,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
             </>
           ) : query.trim() ? (
             <div className={styles.noResults}>
-              <div className={styles.noResultsIcon}>🔍</div>
+              <div className={styles.noResultsIcon}><SearchOutlined /></div>
               <div className={styles.noResultsText}>
                 未找到与 "{query}" 相关的内容
               </div>

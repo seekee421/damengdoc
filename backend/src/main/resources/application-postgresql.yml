@@ -1,0 +1,72 @@
+# PostgreSQL数据库配置模板
+# 请根据您的实际PostgreSQL配置修改以下参数
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: dameng-docs-backend
+  
+  # PostgreSQL数据库配置
+  # 请修改以下配置为您的实际数据库信息
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dameng_docs
+    username: postgres  # 请修改为您的数据库用户名
+    password: your_password_here  # 请修改为您的数据库密码
+    driver-class-name: org.postgresql.Driver
+    
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update  # 生产环境建议使用 validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+    
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+    
+  security:
+    user:
+      name: admin
+      password: admin123
+      roles: ADMIN
+
+# JWT配置
+jwt:
+  secret: ${JWT_SECRET:dameng-docs-jwt-secret-key-2024}
+  expiration: 86400000  # 24小时
+  refresh-expiration: 604800000  # 7天
+
+# API文档配置
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# 日志配置
+logging:
+  level:
+    com.dameng.docs: DEBUG
+    org.springframework.security: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# 管理端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when_authorized

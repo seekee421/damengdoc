@@ -1,0 +1,90 @@
+/**
+ * 达梦数据库文档中心 - 统一色彩规范
+ * 基于 Ant Design 色彩体系
+ */
+
+:root {
+  /* 主色调 - 蓝色系列 */
+  --dm-primary-1: #e6f7ff;  /* 最浅蓝 */
+  --dm-primary-2: #bae7ff;  /* 浅蓝 */
+  --dm-primary-3: #91d5ff;  /* 较浅蓝 */
+  --dm-primary-4: #69c0ff;  /* 中浅蓝 */
+  --dm-primary-5: #40a9ff;  /* 中蓝 */
+  --dm-primary-6: #1890ff;  /* 标准蓝（主色） */
+  --dm-primary-7: #096dd9;  /* 中深蓝 */
+  --dm-primary-8: #0050b3;  /* 深蓝 */
+  --dm-primary-9: #003a8c;  /* 较深蓝 */
+  --dm-primary-10: #002766; /* 最深蓝 */
+
+  /* 功能色彩 */
+  --dm-success: #52c41a;     /* 成功色 */
+  --dm-warning: #faad14;     /* 警告色 */
+  --dm-error: #ff4d4f;       /* 错误色 */
+  --dm-info: #1890ff;        /* 信息色（使用主色） */
+
+  /* 中性色彩 */
+  --dm-text-primary: #262626;    /* 主要文本 */
+  --dm-text-secondary: #595959;  /* 次要文本 */
+  --dm-text-tertiary: #8c8c8c;   /* 辅助文本 */
+  --dm-text-quaternary: #bfbfbf; /* 占位文本 */
+  --dm-text-white: #ffffff;      /* 白色文本 */
+
+  /* 背景色彩 */
+  --dm-bg-primary: #ffffff;      /* 主背景 */
+  --dm-bg-secondary: #fafafa;    /* 次背景 */
+  --dm-bg-tertiary: #f5f5f5;     /* 三级背景 */
+  --dm-bg-quaternary: #f0f0f0;   /* 四级背景 */
+
+  /* 边框色彩 */
+  --dm-border-primary: #d9d9d9;   /* 主边框 */
+  --dm-border-secondary: #f0f0f0; /* 次边框 */
+
+  /* 渐变色彩 */
+  --dm-gradient-primary: linear-gradient(135deg, var(--dm-primary-6) 0%, var(--dm-primary-7) 50%, var(--dm-primary-8) 100%);
+  --dm-gradient-light: linear-gradient(135deg, var(--dm-primary-5) 0%, var(--dm-primary-6) 100%);
+  --dm-gradient-soft: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+  /* 阴影 */
+  --dm-shadow-light: 0 2px 8px rgba(24, 144, 255, 0.1);
+  --dm-shadow-medium: 0 8px 32px rgba(24, 144, 255, 0.1);
+  --dm-shadow-heavy: 0 16px 48px rgba(24, 144, 255, 0.2);
+
+  /* 透明度变体 */
+  --dm-primary-alpha-10: rgba(24, 144, 255, 0.1);
+  --dm-primary-alpha-20: rgba(24, 144, 255, 0.2);
+  --dm-primary-alpha-30: rgba(24, 144, 255, 0.3);
+  --dm-primary-alpha-50: rgba(24, 144, 255, 0.5);
+}
+
+/* 深色主题支持（预留） */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dm-bg-primary: #141414;
+    --dm-bg-secondary: #1f1f1f;
+    --dm-bg-tertiary: #262626;
+    --dm-bg-quaternary: #2f2f2f;
+    
+    --dm-text-primary: #ffffff;
+    --dm-text-secondary: #d9d9d9;
+    --dm-text-tertiary: #8c8c8c;
+    --dm-text-quaternary: #595959;
+    
+    --dm-border-primary: #434343;
+    --dm-border-secondary: #303030;
+  }
+}
+
+/* 工具类 */
+.dm-text-primary { color: var(--dm-primary-6) !important; }
+.dm-text-success { color: var(--dm-success) !important; }
+.dm-text-warning { color: var(--dm-warning) !important; }
+.dm-text-error { color: var(--dm-error) !important; }
+
+.dm-bg-primary { background-color: var(--dm-primary-6) !important; }
+.dm-bg-light { background: var(--dm-gradient-light) !important; }
+.dm-bg-gradient { background: var(--dm-gradient-primary) !important; }
+
+.dm-border-primary { border-color: var(--dm-primary-6) !important; }
+.dm-shadow-light { box-shadow: var(--dm-shadow-light) !important; }
+.dm-shadow-medium { box-shadow: var(--dm-shadow-medium) !important; }
+.dm-shadow-heavy { box-shadow: var(--dm-shadow-heavy) !important; }

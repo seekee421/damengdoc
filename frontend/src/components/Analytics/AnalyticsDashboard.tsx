@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { EyeOutlined, UserOutlined, ClockCircleOutlined, BarChartOutlined } from '@ant-design/icons';
 import { useAnalytics, AnalyticsData } from '../../api/analytics';
 import styles from './AnalyticsDashboard.module.css';
 
@@ -74,7 +75,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
       {/* 概览卡片 */}
       <div className={styles.overviewCards}>
         <div className={styles.card}>
-          <div className={styles.cardIcon}>👁️</div>
+          <div className={styles.cardIcon}><EyeOutlined /></div>
           <div className={styles.cardContent}>
             <h3>页面浏览量</h3>
             <div className={styles.cardValue}>{data.totalViews.toLocaleString()}</div>
@@ -83,7 +84,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
         </div>
 
         <div className={styles.card}>
-          <div className={styles.cardIcon}>👤</div>
+          <div className={styles.cardIcon}><UserOutlined /></div>
           <div className={styles.cardContent}>
             <h3>独立访客</h3>
             <div className={styles.cardValue}>{data.uniqueVisitors.toLocaleString()}</div>
@@ -92,7 +93,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
         </div>
 
         <div className={styles.card}>
-          <div className={styles.cardIcon}>⏱️</div>
+          <div className={styles.cardIcon}><ClockCircleOutlined /></div>
           <div className={styles.cardContent}>
             <h3>平均会话时长</h3>
             <div className={styles.cardValue}>{formatDuration(data.avgSessionDuration)}</div>
@@ -101,7 +102,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
         </div>
 
         <div className={styles.card}>
-          <div className={styles.cardIcon}>📊</div>
+          <div className={styles.cardIcon}><BarChartOutlined /></div>
           <div className={styles.cardContent}>
             <h3>跳出率</h3>
             <div className={styles.cardValue}>{formatPercentage(data.bounceRate)}</div>

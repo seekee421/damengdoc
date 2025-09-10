@@ -1,4 +1,5 @@
 /* Vditor 编辑器页面样式 */
+@import '../styles/colors.css';
 
 /* 编辑器主布局容器 */
 .editorLayout {
@@ -62,7 +63,7 @@
 
 :global(.vditor-toolbar .vditor-tooltipped--current) {
   background: #e6f7ff !important;
-  color: #1890ff !important;
+  color: var(--dm-primary-6) !important;
 }
 
 :global(.vditor-content) {
@@ -114,7 +115,7 @@
 
 :global(.vditor-outline__item--current) {
   background: #e6f7ff !important;
-  color: #1890ff !important;
+  color: var(--dm-primary-6) !important;
   font-weight: 500 !important;
 }
 
@@ -408,11 +409,11 @@
 }
 
 .resizer:hover {
-  background: #1890ff;
+  background: var(--dm-primary-6);
 }
 
 .resizer.dragging {
-  background: #1890ff;
+  background: var(--dm-primary-6);
 }
 
 .resizer::before {

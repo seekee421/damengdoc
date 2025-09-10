@@ -111,63 +111,101 @@ const config: Config = {
         },
       ],
     },
-    // footer: {
-    //   style: 'dark',
-    //   links: [
-    //     {
-    //       title: '产品文档',
-    //       items: [
-    //         {
-    //           label: 'DM8 数据库',
-    //           to: '/docs/dm8/intro',
-    //         },
-    //         {
-    //           label: 'DM7 数据库',
-    //           to: '/docs/dm7/intro',
-    //         },
-    //         {
-    //           label: '快速开始',
-    //           to: '/docs/intro',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: '社区',
-    //       items: [
-    //         {
-    //           label: '技术论坛',
-    //           href: 'https://eco.dameng.com',
-    //         },
-    //         {
-    //           label: '开发者社区',
-    //           href: 'https://eco.dameng.com/community',
-    //         },
-    //         {
-    //           label: '技术支持',
-    //           href: 'https://www.dameng.com/support',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       title: '更多',
-    //       items: [
-    //         {
-    //           label: '技术博客',
-    //           to: '/blog',
-    //         },
-    //         {
-    //           label: '官方网站',
-    //           href: 'https://www.dameng.com',
-    //         },
-    //         {
-    //           label: '下载中心',
-    //           href: 'https://www.dameng.com/download',
-    //         },
-    //       ],
-    //     },
-    //   ],
-    //   copyright: `Copyright © ${new Date().getFullYear()} 达梦数据库股份有限公司. Built with Docusaurus.`,
-    // },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: '产品文档',
+          items: [
+            {
+              label: 'DM8 数据库',
+              to: '/docs/dm8/intro',
+            },
+            {
+              label: 'DM7 数据库',
+              to: '/docs/dm7/intro',
+            },
+            {
+              label: '快速开始',
+              to: '/docs/intro',
+            },
+            {
+              label: '安装指南',
+              to: '/docs/installation',
+            },
+          ],
+        },
+        {
+          title: '开发者资源',
+          items: [
+            {
+              label: 'API 文档',
+              to: '/docs/api',
+            },
+            {
+              label: 'SDK 下载',
+              to: '/docs/sdk',
+            },
+            {
+              label: '示例代码',
+              to: '/docs/examples',
+            },
+            {
+              label: '最佳实践',
+              to: '/docs/best-practices',
+            },
+          ],
+        },
+        {
+          title: '社区与支持',
+          items: [
+            {
+              label: '技术论坛',
+              href: 'https://eco.dameng.com',
+            },
+            {
+              label: '开发者社区',
+              href: 'https://eco.dameng.com/community',
+            },
+            {
+              label: '技术支持',
+              href: 'https://www.dameng.com/support',
+            },
+            {
+              label: '问题反馈',
+              href: 'https://github.com/dameng/issues',
+            },
+          ],
+        },
+        {
+          title: '更多资源',
+          items: [
+            {
+              label: '技术博客',
+              to: '/blog',
+            },
+            {
+              label: '官方网站',
+              href: 'https://www.dameng.com',
+            },
+            {
+              label: '下载中心',
+              href: 'https://www.dameng.com/download',
+            },
+            {
+              label: '培训认证',
+              href: 'https://www.dameng.com/training',
+            },
+          ],
+        },
+      ],
+      copyright: `
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <div>Copyright © ${new Date().getFullYear()} 达梦数据库股份有限公司. Built with Docusaurus.</div>
+          <div style="font-size: 0.9em; opacity: 0.8;">专业的国产数据库解决方案提供商 | 自主可控 · 安全可靠</div>
+        </div>
+      `,
+    },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from '@docusaurus/router';
 import Layout from '@theme/Layout';
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { useAuth } from '../contexts/AuthContext';
 import styles from './login.module.css';
 
@@ -139,7 +140,7 @@ export default function LoginPage(): React.ReactElement {
                       onClick={() => setShowPassword(!showPassword)}
                       aria-label={showPassword ? '隐藏密码' : '显示密码'}
                     >
-                      {showPassword ? '👁️' : '👁️‍🗨️'}
+                      {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                     </button>
                   </div>
                 </div>

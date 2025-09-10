@@ -6,14 +6,16 @@
   padding: 2rem;
 }
 
+@import '../../styles/colors.css';
+
 .loginForm {
-  background: white;
+  background: var(--dm-bg-primary);
   border: 1px solid #e8e8e8;
   border-radius: 8px;
   padding: 2rem;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--dm-shadow-medium);
 }
 
 .header {
@@ -76,12 +78,12 @@
 }
 
 .formGroup input:hover {
-  border-color: #1890ff;
+  border-color: var(--dm-primary-6);
 }
 
 .formGroup input:focus {
   outline: none;
-  border-color: #1890ff;
+  border-color: var(--dm-primary-6);
   box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
 
@@ -117,7 +119,7 @@
 }
 
 .togglePassword:hover {
-  color: #1890ff;
+  color: var(--dm-primary-6);
 }
 
 .togglePassword:disabled {
@@ -144,9 +146,9 @@
 }
 
 .loginButton {
-  background-color: #1890ff;
+  background-color: var(--dm-primary-6);
   color: white;
-  border: 1px solid #1890ff;
+  border: 1px solid var(--dm-primary-6);
   padding: 0.75rem 1rem;
   border-radius: 6px;
   font-size: 0.875rem;
@@ -161,15 +163,15 @@
 }
 
 .loginButton:hover:not(:disabled) {
-  background-color: #40a9ff;
-  border-color: #40a9ff;
+  background-color: var(--dm-primary-5);
+  border-color: var(--dm-primary-5);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
 }
 
 .loginButton:active:not(:disabled) {
-  background-color: #096dd9;
-  border-color: #096dd9;
+  background-color: var(--dm-primary-7);
+  border-color: var(--dm-primary-7);
   transform: translateY(0);
 }
 
@@ -201,8 +203,8 @@
 
 .cancelButton:hover:not(:disabled) {
   background-color: #fafafa;
-  border-color: #40a9ff;
-  color: #40a9ff;
+  border-color: var(--dm-primary-5);
+  color: var(--dm-primary-5);
 }
 
 .cancelButton:disabled {
@@ -243,11 +245,11 @@
 }
 
 [data-theme='dark'] .formGroup input:hover {
-  border-color: #40a9ff;
+  border-color: var(--dm-primary-5);
 }
 
 [data-theme='dark'] .formGroup input:focus {
-  border-color: #40a9ff;
+  border-color: var(--dm-primary-5);
   box-shadow: 0 0 0 2px rgba(64, 169, 255, 0.2);
 }
 
@@ -256,7 +258,7 @@
 }
 
 [data-theme='dark'] .togglePassword:hover {
-  color: #40a9ff;
+  color: var(--dm-primary-5);
 }
 
 [data-theme='dark'] .cancelButton {
@@ -266,8 +268,8 @@
 
 [data-theme='dark'] .cancelButton:hover:not(:disabled) {
   background-color: var(--ifm-color-emphasis-200);
-  border-color: #40a9ff;
-  color: #40a9ff;
+  border-color: var(--dm-primary-5);
+  color: var(--dm-primary-5);
 }
 
 [data-theme='dark'] .cancelButton:disabled {

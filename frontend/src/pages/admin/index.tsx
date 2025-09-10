@@ -72,7 +72,7 @@ const statsCards = [
     change: '+12%',
     changeType: 'increase',
     icon: 'user-group',
-    color: '#1890ff'
+    color: 'var(--dm-primary-6)'
   },
   {
     id: 'total-docs',
@@ -111,7 +111,7 @@ const recentActivities = [
     icon: 'user-plus',
     text: '新用户 "张三" 注册成功',
     time: '2 分钟前',
-    color: '#1890ff'
+    color: 'var(--dm-primary-6)'
   },
   {
     id: 2,
@@ -213,7 +213,7 @@ const AdminDashboardContent: React.FC = () => {
       <div className={styles.sidebarHeader}>
         <div className={styles.logo}>
           <div className={styles.logoIcon}>
-            {renderIcon('document-text', '#1890ff', styles.logoIconSvg)}
+            {renderIcon('document-text', 'var(--dm-primary-6)', styles.logoIconSvg)}
           </div>
           {!state.sidebarCollapsed && <span className={styles.logoText}>达梦文档中心</span>}
         </div>
@@ -238,7 +238,7 @@ const AdminDashboardContent: React.FC = () => {
             >
               <div className={styles.menuItemContent}>
                 <div className={styles.menuIcon}>
-                  {renderIcon(menu.icon, menu.active ? '#1890ff' : '#666', styles.menuIconSvg)}
+                  {renderIcon(menu.icon, menu.active ? 'var(--dm-primary-6)' : '#666', styles.menuIconSvg)}
                 </div>
                 {!state.sidebarCollapsed && (
                   <>

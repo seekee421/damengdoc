@@ -1,5 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { 
+  UserOutlined, 
+  SettingOutlined, 
+  EditOutlined, 
+  TeamOutlined, 
+  ToolOutlined, 
+  BarChartOutlined, 
+  LogoutOutlined 
+} from '@ant-design/icons';
 import styles from './UserInfo.module.css';
 
 interface UserInfoProps {
@@ -62,7 +71,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ onLoginClick }) => {
           className={styles.loginButton}
           onClick={onLoginClick}
         >
-          <span className={styles.loginIcon}>👤</span>
+          <span className={styles.loginIcon}><UserOutlined /></span>
           登录
         </button>
       </div>
@@ -120,18 +129,18 @@ const UserInfo: React.FC<UserInfoProps> = ({ onLoginClick }) => {
 
           <div className={styles.dropdownMenu}>
             <a href="/profile" className={styles.menuItem}>
-              <span className={styles.menuIcon}>👤</span>
+              <span className={styles.menuIcon}><UserOutlined /></span>
               个人资料
             </a>
             
             <a href="/settings" className={styles.menuItem}>
-              <span className={styles.menuIcon}>⚙️</span>
+              <span className={styles.menuIcon}><SettingOutlined /></span>
               账户设置
             </a>
 
             {isEditor() && (
               <a href="/admin/docs" className={styles.menuItem}>
-                <span className={styles.menuIcon}>📝</span>
+                <span className={styles.menuIcon}><EditOutlined /></span>
                 文档管理
               </a>
             )}
@@ -139,15 +148,15 @@ const UserInfo: React.FC<UserInfoProps> = ({ onLoginClick }) => {
             {isAdmin() && (
               <>
                 <a href="/admin/users" className={styles.menuItem}>
-                  <span className={styles.menuIcon}>👥</span>
+                  <span className={styles.menuIcon}><TeamOutlined /></span>
                   用户管理
                 </a>
                 <a href="/admin/system" className={styles.menuItem}>
-                  <span className={styles.menuIcon}>🔧</span>
+                  <span className={styles.menuIcon}><ToolOutlined /></span>
                   系统设置
                 </a>
                 <a href="/admin/analytics" className={styles.menuItem}>
-                  <span className={styles.menuIcon}>📊</span>
+                  <span className={styles.menuIcon}><BarChartOutlined /></span>
                   数据统计
                 </a>
               </>
@@ -161,7 +170,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ onLoginClick }) => {
               className={styles.logoutButton}
               onClick={handleLogout}
             >
-              <span className={styles.menuIcon}>🚪</span>
+              <span className={styles.menuIcon}><LogoutOutlined /></span>
               退出登录
             </button>
           </div>

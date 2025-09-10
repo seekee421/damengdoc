@@ -1,6 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import type { JSX } from 'react';
 import Layout from '@theme/Layout';
+import { 
+  LikeOutlined, 
+  DislikeOutlined, 
+  BulbOutlined, 
+  BugOutlined,
+  ClockCircleOutlined,
+  EyeOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  BarChartOutlined,
+  RiseOutlined,
+  SearchOutlined,
+  InboxOutlined,
+  StarOutlined,
+  CalendarOutlined,
+  MailOutlined,
+  CloseOutlined
+} from '@ant-design/icons';
 import { useAuth } from '../../contexts/AuthContext';
 import styles from './feedback.module.css';
 
@@ -51,17 +69,17 @@ const statusLabels = {
 };
 
 const typeIcons = {
-  'helpful': '👍',
-  'not-helpful': '👎',
-  'suggestion': '💡',
-  'error': '🐛'
+  'helpful': <LikeOutlined />,
+  'not-helpful': <DislikeOutlined />,
+  'suggestion': <BulbOutlined />,
+  'error': <BugOutlined />
 };
 
 const statusIcons = {
-  'pending': '⏳',
-  'reviewed': '👀',
-  'resolved': '✅',
-  'dismissed': '❌'
+  'pending': <ClockCircleOutlined />,
+  'reviewed': <EyeOutlined />,
+  'resolved': <CheckCircleOutlined />,
+  'dismissed': <CloseCircleOutlined />
 };
 
 export default function FeedbackManagementPage(): JSX.Element {
@@ -229,7 +247,7 @@ export default function FeedbackManagementPage(): JSX.Element {
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>
-            <span className={styles.titleIcon}>📊</span>
+            <span className={styles.titleIcon}><BarChartOutlined /></span>
             反馈管理
           </h1>
           <p className={styles.subtitle}>
@@ -240,7 +258,7 @@ export default function FeedbackManagementPage(): JSX.Element {
         {/* 统计卡片 */}
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
-            <div className={styles.statIcon}>📈</div>
+            <div className={styles.statIcon}><RiseOutlined /></div>
             <div className={styles.statContent}>
               <div className={styles.statNumber}>{stats.total}</div>
               <div className={styles.statLabel}>总反馈</div>
@@ -248,7 +266,7 @@ export default function FeedbackManagementPage(): JSX.Element {
           </div>
           
           <div className={styles.statCard}>
-            <div className={styles.statIcon}>👍</div>
+            <div className={styles.statIcon}><LikeOutlined /></div>
             <div className={styles.statContent}>
               <div className={styles.statNumber}>{stats.helpful}</div>
               <div className={styles.statLabel}>有帮助</div>
@@ -256,7 +274,7 @@ export default function FeedbackManagementPage(): JSX.Element {
           </div>
           
           <div className={styles.statCard}>
-            <div className={styles.statIcon}>💡</div>
+            <div className={styles.statIcon}><BulbOutlined /></div>
             <div className={styles.statContent}>
               <div className={styles.statNumber}>{stats.suggestions}</div>
               <div className={styles.statLabel}>建议</div>
@@ -264,7 +282,7 @@ export default function FeedbackManagementPage(): JSX.Element {
           </div>
           
           <div className={styles.statCard}>
-            <div className={styles.statIcon}>🐛</div>
+            <div className={styles.statIcon}><BugOutlined /></div>
             <div className={styles.statContent}>
               <div className={styles.statNumber}>{stats.errors}</div>
               <div className={styles.statLabel}>错误报告</div>
@@ -272,7 +290,7 @@ export default function FeedbackManagementPage(): JSX.Element {
           </div>
           
           <div className={styles.statCard}>
-            <div className={styles.statIcon}>⏳</div>
+            <div className={styles.statIcon}><ClockCircleOutlined /></div>
             <div className={styles.statContent}>
               <div className={styles.statNumber}>{stats.pending}</div>
               <div className={styles.statLabel}>待处理</div>
@@ -280,7 +298,7 @@ export default function FeedbackManagementPage(): JSX.Element {
           </div>
           
           <div className={styles.statCard}>
-            <div className={styles.statIcon}>✅</div>
+            <div className={styles.statIcon}><CheckCircleOutlined /></div>
             <div className={styles.statContent}>
               <div className={styles.statNumber}>{stats.resolved}</div>
               <div className={styles.statLabel}>已解决</div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { StopOutlined } from '@ant-design/icons';
 import { useAuth } from '../../contexts/AuthContext';
 import LoginForm from './LoginForm';
 
@@ -57,7 +58,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         gap: '1rem',
         textAlign: 'center'
       }}>
-        <h2>🚫 访问被拒绝</h2>
+        <h2><StopOutlined /> 访问被拒绝</h2>
         <p>您需要管理员权限才能访问此页面</p>
         <p>当前用户：<strong>{user?.username}</strong></p>
         <p>当前权限：<strong>{user?.role === 'admin' ? '管理员' : user?.role === 'editor' ? '编辑员' : '查看者'}</strong></p>
@@ -90,7 +91,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         gap: '1rem',
         textAlign: 'center'
       }}>
-        <h2>🚫 访问被拒绝</h2>
+        <h2><StopOutlined /> 访问被拒绝</h2>
         <p>您需要编辑员或管理员权限才能访问此页面</p>
         <p>当前用户：<strong>{user?.username}</strong></p>
         <p>当前权限：<strong>{user?.role === 'admin' ? '管理员' : user?.role === 'editor' ? '编辑员' : '查看者'}</strong></p>

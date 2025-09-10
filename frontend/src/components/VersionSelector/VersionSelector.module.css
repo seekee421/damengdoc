@@ -1,4 +1,6 @@
-/* 版本选择器容器 */
+/* 版本选择器样式 */
+@import '../../styles/colors.css';
+
 .versionSelector {
   position: relative;
   display: inline-block;
@@ -42,7 +44,7 @@
 
 
 .versionButton:hover {
-  border-color: #40a9ff;
+  border-color: var(--dm-primary-5);
 }
 
 .versionButton:focus {
