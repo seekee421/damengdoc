@@ -1,0 +1,70 @@
+{
+  "editor.title": {
+    "message": "在线编辑器",
+    "description": "Editor page title"
+  },
+  "editor.description": {
+    "message": "基于达梦数据库的在线文档编辑器，支持Markdown编辑和实时预览",
+    "description": "Editor page description"
+  },
+  "editor.docTree.title": {
+    "message": "达梦数据库需求文档",
+    "description": "Document tree root title"
+  },
+  "editor.docTree.deployment": {
+    "message": "部署及访问方式",
+    "description": "Document tree deployment section"
+  },
+  "editor.docTree.privateDeployment": {
+    "message": "私有化部署★★★",
+    "description": "Private deployment option"
+  },
+  "editor.docTree.multiAccess": {
+    "message": "支持多端访问★★",
+    "description": "Multi-platform access option"
+  },
+  "editor.docTree.languageStyle": {
+    "message": "产品在线文档中心的语言和性质风格",
+    "description": "Language and style section"
+  },
+  "editor.docTree.docNature": {
+    "message": "产品在线文档中心文档性质及效果",
+    "description": "Document nature subsection"
+  },
+  "editor.docTree.permissions": {
+    "message": "文档权限控制",
+    "description": "Permission control section"
+  },
+  "editor.docTree.directoryManagement": {
+    "message": "文档目录管理★★★★★★",
+    "description": "Directory management option"
+  },
+  "editor.outline.deployment": {
+    "message": "部署及访问方式",
+    "description": "Outline deployment section"
+  },
+  "editor.outline.privateDeployment": {
+    "message": "私有化部署★★★",
+    "description": "Outline private deployment"
+  },
+  "editor.outline.multiAccess": {
+    "message": "支持多端访问★★",
+    "description": "Outline multi-platform access"
+  },
+  "editor.outline.languageStyle": {
+    "message": "产品在线文档中心的语言和性质风格",
+    "description": "Outline language and style"
+  },
+  "editor.outline.docNature": {
+    "message": "产品在线文档中心文档性质及效果",
+    "description": "Outline document nature"
+  },
+  "editor.outline.permissions": {
+    "message": "文档权限控制",
+    "description": "Outline permission control"
+  },
+  "editor.outline.directoryManagement": {
+    "message": "文档目录管理★★★★★★",
+    "description": "Outline directory management"
+  }
+}

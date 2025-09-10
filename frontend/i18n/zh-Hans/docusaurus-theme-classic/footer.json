@@ -1,0 +1,54 @@
+{
+  "link.title.产品文档": {
+    "message": "产品文档",
+    "description": "页脚链接列标题=产品文档"
+  },
+  "link.title.社区": {
+    "message": "社区",
+    "description": "页脚链接列标题=社区"
+  },
+  "link.title.更多": {
+    "message": "更多",
+    "description": "页脚链接列标题=更多"
+  },
+  "link.item.label.DM8 数据库": {
+    "message": "DM8 数据库",
+    "description": "页脚链接标签=DM8 数据库"
+  },
+  "link.item.label.DM7 数据库": {
+    "message": "DM7 数据库",
+    "description": "页脚链接标签=DM7 数据库"
+  },
+  "link.item.label.快速开始": {
+    "message": "快速开始",
+    "description": "页脚链接标签=快速开始"
+  },
+  "link.item.label.技术论坛": {
+    "message": "技术论坛",
+    "description": "页脚链接标签=技术论坛"
+  },
+  "link.item.label.开发者社区": {
+    "message": "开发者社区",
+    "description": "页脚链接标签=开发者社区"
+  },
+  "link.item.label.技术支持": {
+    "message": "技术支持",
+    "description": "页脚链接标签=技术支持"
+  },
+  "link.item.label.技术博客": {
+    "message": "技术博客",
+    "description": "页脚链接标签=技术博客"
+  },
+  "link.item.label.官方网站": {
+    "message": "官方网站",
+    "description": "页脚链接标签=官方网站"
+  },
+  "link.item.label.下载中心": {
+    "message": "下载中心",
+    "description": "页脚链接标签=下载中心"
+  },
+  "copyright": {
+    "message": "版权所有 © 2024 达梦数据库股份有限公司。保留所有权利。",
+    "description": "页脚版权信息"
+  }
+}

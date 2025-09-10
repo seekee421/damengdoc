@@ -1,0 +1,422 @@
+/* 主容器 */
+.dashboard {
+  padding: 24px;
+  background: var(--ifm-background-color);
+  min-height: 100vh;
+}
+
+/* 头部 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--ifm-color-content);
+}
+
+.dateRange {
+  padding: 8px 16px;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: var(--ifm-color-content-secondary);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--ifm-color-emphasis-200);
+  border-top: 4px solid var(--ifm-color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 概览卡片 */
+.overviewCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.cardIcon {
+  font-size: 2.5rem;
+  margin-right: 16px;
+  opacity: 0.8;
+}
+
+.cardContent {
+  flex: 1;
+}
+
+.cardContent h3 {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ifm-color-content-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cardValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ifm-color-content);
+  margin-bottom: 4px;
+}
+
+.cardChange {
+  font-size: 0.85rem;
+  color: var(--ifm-color-success);
+  font-weight: 500;
+}
+
+/* 图表区域 */
+.chartsSection {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.chartCard {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  box-shadow: var(--ifm-global-shadow-lw);
+  overflow: hidden;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.chartHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ifm-color-content);
+}
+
+.chartControls {
+  display: flex;
+  gap: 8px;
+}
+
+.chartControls button {
+  padding: 6px 12px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-content-secondary);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chartControls button:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.chartControls button.active {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-color: var(--ifm-color-primary);
+}
+
+.chartContent {
+  padding: 24px;
+}
+
+/* 简单图表 */
+.simpleChart {
+  display: flex;
+  align-items: end;
+  height: 200px;
+  gap: 8px;
+  padding: 0 8px;
+}
+
+.chartBar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.bar {
+  width: 100%;
+  background: linear-gradient(to top, var(--ifm-color-primary), var(--ifm-color-primary-light));
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.bar:hover {
+  opacity: 0.8;
+}
+
+.barLabel {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* 设备统计 */
+.deviceStats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.deviceItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.deviceInfo {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 120px;
+}
+
+.deviceName {
+  font-weight: 500;
+  color: var(--ifm-color-content);
+}
+
+.deviceCount {
+  font-size: 0.9rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.deviceBar {
+  flex: 2;
+  height: 8px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.deviceProgress {
+  height: 100%;
+  background: var(--ifm-color-primary);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.devicePercentage {
+  min-width: 40px;
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ifm-color-content);
+}
+
+/* 详细数据区域 */
+.detailsSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.detailCard {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  box-shadow: var(--ifm-global-shadow-lw);
+  overflow: hidden;
+}
+
+.detailHeader {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.detailHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ifm-color-content);
+}
+
+.detailContent {
+  padding: 0;
+}
+
+/* 表格 */
+.table {
+  width: 100%;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  background: var(--ifm-color-emphasis-100);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ifm-color-content-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  transition: background-color 0.2s ease;
+}
+
+.tableRow:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.pageInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pageTitle {
+  font-weight: 500;
+  color: var(--ifm-color-content);
+  font-size: 0.9rem;
+}
+
+.pagePath {
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.queryText {
+  font-weight: 500;
+  color: var(--ifm-color-content);
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .chartsSection {
+    grid-template-columns: 1fr;
+  }
+  
+  .detailsSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 16px;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .overviewCards {
+    grid-template-columns: 1fr;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .cardValue {
+    font-size: 1.5rem;
+  }
+  
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .tableHeader {
+    display: none;
+  }
+  
+  .tableRow {
+    padding: 16px;
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .card {
+  background: var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .chartCard,
+[data-theme='dark'] .detailCard {
+  background: var(--ifm-background-surface-color);
+}
+
+[data-theme='dark'] .bar {
+  background: linear-gradient(to top, var(--ifm-color-primary-dark), var(--ifm-color-primary));
+}
+
+[data-theme='dark'] .deviceProgress {
+  background: var(--ifm-color-primary-dark);
+}

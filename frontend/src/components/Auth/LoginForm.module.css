@@ -1,0 +1,277 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+.loginForm {
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h2 {
+  color: var(--ifm-color-emphasis-800);
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.header p {
+  color: var(--ifm-color-emphasis-600);
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+}
+
+.features {
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.feature {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.feature:last-child {
+  margin-bottom: 0;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-emphasis-800);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-800);
+}
+
+.formGroup input:hover {
+  border-color: #1890ff;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.formGroup input:disabled {
+  background-color: var(--ifm-color-emphasis-100);
+  cursor: not-allowed;
+}
+
+.passwordInput {
+  position: relative;
+}
+
+.passwordInput input {
+  padding-right: 3rem;
+}
+
+.togglePassword {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--ifm-color-emphasis-600);
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.togglePassword:hover {
+  color: #1890ff;
+}
+
+.togglePassword:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.error {
+  background-color: var(--ifm-color-danger-contrast-background);
+  border: 1px solid var(--ifm-color-danger-contrast-border);
+  color: var(--ifm-color-danger-contrast-foreground);
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.loginButton {
+  background-color: #1890ff;
+  color: white;
+  border: 1px solid #1890ff;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginButton:hover:not(:disabled) {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+}
+
+.loginButton:active:not(:disabled) {
+  background-color: #096dd9;
+  border-color: #096dd9;
+  transform: translateY(0);
+}
+
+.loginButton:disabled {
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.cancelButton {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.65);
+  border: 1px solid #d9d9d9;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background-color: #fafafa;
+  border-color: #40a9ff;
+  color: #40a9ff;
+}
+
+.cancelButton:disabled {
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .loginContainer {
+    padding: 1rem;
+  }
+  
+  .loginForm {
+    padding: 1.5rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .header h2 {
+  color: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .header p {
+  color: var(--ifm-color-emphasis-600);
+}
+
+[data-theme='dark'] .formGroup input {
+  background-color: var(--ifm-background-color);
+  border-color: var(--ifm-color-emphasis-400);
+  color: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .formGroup input:hover {
+  border-color: #40a9ff;
+}
+
+[data-theme='dark'] .formGroup input:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(64, 169, 255, 0.2);
+}
+
+[data-theme='dark'] .togglePassword {
+  color: var(--ifm-color-emphasis-600);
+}
+
+[data-theme='dark'] .togglePassword:hover {
+  color: #40a9ff;
+}
+
+[data-theme='dark'] .cancelButton {
+  color: var(--ifm-color-emphasis-700);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .cancelButton:hover:not(:disabled) {
+  background-color: var(--ifm-color-emphasis-200);
+  border-color: #40a9ff;
+  color: #40a9ff;
+}
+
+[data-theme='dark'] .cancelButton:disabled {
+  background-color: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-emphasis-500);
+}

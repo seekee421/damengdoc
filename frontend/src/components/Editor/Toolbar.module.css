@@ -1,0 +1,165 @@
+/* 编辑器工具栏样式 */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  min-height: 40px;
+  flex-wrap: wrap;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.group:last-child {
+  border-right: none;
+}
+
+.groupLabel {
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-600);
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+  color: var(--ifm-color-emphasis-800);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  min-height: 28px;
+}
+
+.button:hover {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-primary);
+}
+
+.button:active {
+  background: var(--ifm-color-emphasis-200);
+}
+
+.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+}
+
+.label {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.shortcut {
+  font-size: 10px;
+  color: var(--ifm-color-emphasis-500);
+  background: var(--ifm-color-emphasis-100);
+  padding: 2px 4px;
+  border-radius: 2px;
+  margin-left: 4px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .toolbar {
+    padding: 6px 8px;
+    gap: 4px;
+  }
+  
+  .group {
+    padding: 0 4px;
+  }
+  
+  .button {
+    padding: 4px 6px;
+    min-height: 24px;
+  }
+  
+  .label {
+    display: none;
+  }
+  
+  .shortcut {
+    display: none;
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .toolbar {
+  background: var(--ifm-background-surface-color);
+  border-bottom-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .button:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .button:active {
+  background: var(--ifm-color-emphasis-300);
+}
+
+/* 焦点样式 */
+.button:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* 动画效果 */
+.button {
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--ifm-color-primary-lightest);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+  z-index: 0;
+}
+
+.button:active::before {
+  width: 100px;
+  height: 100px;
+}
+
+.button > * {
+  position: relative;
+  z-index: 1;
+}

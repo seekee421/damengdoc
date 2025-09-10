@@ -1,0 +1,139 @@
+/* 编辑器状态栏样式 */
+
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 12px;
+  background: var(--ifm-background-surface-color);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-700);
+  min-height: 24px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.item.dirty {
+  color: var(--ifm-color-warning);
+  font-weight: 500;
+}
+
+.select {
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 11px;
+  color: var(--ifm-color-emphasis-800);
+  cursor: pointer;
+  min-width: 60px;
+}
+
+.select:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 1px var(--ifm-color-primary-lightest);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .statusBar {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  
+  .left {
+    gap: 8px;
+  }
+  
+  .right {
+    gap: 4px;
+  }
+  
+  .item {
+    font-size: 10px;
+  }
+  
+  .select {
+    font-size: 10px;
+    padding: 1px 4px;
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .left {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .item:nth-child(n+3) {
+    display: none;
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .statusBar {
+  background: var(--ifm-background-surface-color);
+  border-top-color: var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-emphasis-600);
+}
+
+[data-theme='dark'] .select {
+  border-color: var(--ifm-color-emphasis-400);
+  color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .select:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-primary);
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .statusBar {
+    border-top-width: 2px;
+  }
+  
+  .select {
+    border-width: 2px;
+  }
+}
+
+/* 动画效果 */
+.item {
+  transition: color 0.2s ease;
+}
+
+.select {
+  transition: all 0.2s ease;
+}
+
+/* 焦点样式 */
+.select:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 1px;
+}

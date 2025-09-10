@@ -1,0 +1,70 @@
+{
+  "editor.title": {
+    "message": "Markdown Editor",
+    "description": "The title of the editor page"
+  },
+  "editor.description": {
+    "message": "Professional Markdown editor with real-time preview",
+    "description": "The description of the editor page"
+  },
+  "editor.docTree.title": {
+    "message": "Dameng Database Requirements Document",
+    "description": "Document tree root title"
+  },
+  "editor.docTree.deployment": {
+    "message": "Deployment and Access Methods",
+    "description": "Document tree deployment section"
+  },
+  "editor.docTree.privateDeployment": {
+    "message": "Private Deployment★★★",
+    "description": "Private deployment option"
+  },
+  "editor.docTree.multiAccess": {
+    "message": "Multi-platform Access★★",
+    "description": "Multi-platform access option"
+  },
+  "editor.docTree.languageStyle": {
+    "message": "Language and Style of Product Documentation Center",
+    "description": "Language and style section"
+  },
+  "editor.docTree.docNature": {
+    "message": "Nature and Effects of Product Documentation Center",
+    "description": "Document nature subsection"
+  },
+  "editor.docTree.permissions": {
+    "message": "Document Permission Control",
+    "description": "Permission control section"
+  },
+  "editor.docTree.directoryManagement": {
+    "message": "Document Directory Management★★★★★★",
+    "description": "Directory management option"
+  },
+  "editor.outline.deployment": {
+    "message": "Deployment and Access Methods",
+    "description": "Outline deployment section"
+  },
+  "editor.outline.privateDeployment": {
+    "message": "Private Deployment★★★",
+    "description": "Outline private deployment"
+  },
+  "editor.outline.multiAccess": {
+    "message": "Multi-platform Access★★",
+    "description": "Outline multi-platform access"
+  },
+  "editor.outline.languageStyle": {
+    "message": "Language and Style of Product Documentation Center",
+    "description": "Outline language and style"
+  },
+  "editor.outline.docNature": {
+    "message": "Nature and Effects of Product Documentation Center",
+    "description": "Outline document nature"
+  },
+  "editor.outline.permissions": {
+    "message": "Document Permission Control",
+    "description": "Outline permission control"
+  },
+  "editor.outline.directoryManagement": {
+    "message": "Document Directory Management★★★★★★",
+    "description": "Outline directory management"
+  }
+}

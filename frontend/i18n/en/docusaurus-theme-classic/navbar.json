@@ -1,0 +1,34 @@
+{
+  "title": {
+    "message": "Dameng Database Documentation Center",
+    "description": "The title in the navbar"
+  },
+  "item.label.产品文档": {
+    "message": "Documentation",
+    "description": "Navbar item with label 产品文档"
+  },
+  "item.label.产品版本": {
+    "message": "Product Versions",
+    "description": "Navbar item with label 产品版本"
+  },
+  "item.label.DM8 数据库": {
+    "message": "DM8 Database",
+    "description": "Navbar item with label DM8 数据库"
+  },
+  "item.label.DM7 数据库": {
+    "message": "DM7 Database",
+    "description": "Navbar item with label DM7 数据库"
+  },
+  "item.label.技术博客": {
+    "message": "Tech Blog",
+    "description": "Navbar item with label 技术博客"
+  },
+  "item.label.语言": {
+    "message": "Language",
+    "description": "Navbar item with label 语言"
+  },
+  "item.label.官网": {
+    "message": "Official Site",
+    "description": "Navbar item with label 官网"
+  }
+}

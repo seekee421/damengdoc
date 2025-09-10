@@ -1,0 +1,488 @@
+/* 版本选择器容器 */
+.versionSelector {
+  position: relative;
+  display: inline-block;
+  min-width: 180px;
+}
+
+/* 不同位置的样式 */
+.versionSelector.navbar {
+  margin-right: 16px;
+}
+
+.versionSelector.sidebar {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.versionSelector.inline {
+  display: inline-block;
+}
+
+/* 版本选择按钮 */
+.versionButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.88);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  font-size: 14px;
+  font-weight: 400;
+  min-width: 160px;
+  white-space: nowrap;
+  height: 32px;
+}
+
+
+
+.versionButton:hover {
+  border-color: #40a9ff;
+}
+
+.versionButton:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
+}
+
+/* 版本信息 */
+.versionInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.versionIcon {
+  font-size: 16px;
+}
+
+.versionText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex: 1;
+}
+
+.versionName {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ifm-color-content);
+}
+
+.badges {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+/* 版本标签 */
+.latestBadge {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 3px rgba(40, 167, 69, 0.3);
+}
+
+.ltsBadge {
+  background: #f0f0f0;
+  color: #666;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+}
+
+.deprecatedBadge {
+  background: #f5f5f5;
+  color: #999;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #e8e8e8;
+}
+
+
+
+/* 下拉箭头 */
+.dropdownArrow {
+  font-size: 10px;
+  color: var(--ifm-color-content-secondary);
+  transition: transform 0.2s ease;
+}
+
+.dropdownArrow.open {
+  transform: rotate(180deg);
+}
+
+/* 版本下拉列表 */
+.versionDropdown {
+  position: fixed;
+  background: #ffffff !important;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 99999;
+  overflow: hidden;
+  min-width: 320px;
+  max-width: 400px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  isolation: isolate;
+}
+
+
+
+/* 下拉列表头部 */
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--ifm-color-emphasis-100);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ifm-color-content-secondary);
+}
+
+.headerIcon {
+  font-size: 14px;
+}
+
+/* 版本列表 */
+.versionList {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* 版本项 */
+.versionItem {
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: #ffffff !important;
+}
+
+.versionItem:hover {
+  background: #f5f5f5 !important;
+  color: #262626 !important;
+}
+
+.versionItem.selected {
+  background: #e6f4ff !important;
+  color: #1677ff !important;
+  border-left: 3px solid #1677ff;
+  padding-left: 13px;
+}
+
+.versionItem.selected:hover {
+  background: #d4edff !important;
+}
+
+.versionItem:last-child {
+  border-bottom: none;
+}
+
+/* 版本项头部 */
+.versionItemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.versionItemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.versionItemName {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ifm-color-content);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.versionBadges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.statusBadge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.statusBadge.stable {
+  background: var(--ifm-color-success-lightest);
+  color: var(--ifm-color-success-darkest);
+}
+
+.statusBadge.beta {
+  background: var(--ifm-color-warning-lightest);
+  color: var(--ifm-color-warning-darkest);
+}
+
+.statusBadge.alpha {
+  background: var(--ifm-color-danger-lightest);
+  color: var(--ifm-color-danger-darkest);
+}
+
+.statusBadge.deprecated {
+  background: var(--ifm-color-secondary-lightest);
+  color: var(--ifm-color-secondary-darkest);
+}
+
+.selectedIcon {
+  color: #1677ff;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* 版本描述 */
+.versionDescription {
+  font-size: 12px;
+  color: var(--ifm-color-content-secondary);
+  line-height: 1.5;
+  margin: 6px 0;
+  padding-left: 0;
+  width: 100%;
+}
+
+/* 版本元信息 */
+.versionMeta {
+  font-size: 11px;
+  color: var(--ifm-color-content-secondary);
+  margin-top: 6px;
+  width: 100%;
+}
+
+.releaseDate {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.8;
+}
+
+/* 下拉列表底部 */
+.dropdownFooter {
+  padding: 12px 16px;
+  background: var(--ifm-color-emphasis-100);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.versionHistoryLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.versionHistoryLink:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* 侧边栏样式调整 */
+.versionSelector.sidebar .versionButton {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.versionSelector.sidebar .versionDropdown {
+  left: 0;
+  right: 0;
+  min-width: auto;
+}
+
+/* 内联样式调整 */
+.versionSelector.inline .versionButton {
+  min-width: 120px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.versionSelector.inline .versionDropdown {
+  min-width: 250px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .versionButton {
+    min-width: 140px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  .versionDropdown {
+    min-width: 280px;
+    left: -50px;
+  }
+  
+  .versionSelector.navbar .versionDropdown {
+    right: 0;
+    left: auto;
+  }
+  
+  .versionItemName {
+    font-size: 13px;
+  }
+  
+  .versionDescription {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .versionDropdown {
+    left: -100px;
+    right: -20px;
+    min-width: auto;
+  }
+  
+  .versionSelector.navbar .versionDropdown {
+    left: -150px;
+    right: 0;
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .versionButton {
+  background: #141414;
+  border-color: #424242;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme='dark'] .versionButton:hover {
+  background: #141414;
+  border-color: #1677ff;
+  color: #1677ff;
+}
+
+[data-theme='dark'] .versionDropdown {
+  background: #141414;
+  border-color: #424242;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.32), 0 3px 6px -4px rgba(0, 0, 0, 0.32), 0 9px 28px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .dropdownHeader {
+  background: #1f1f1f;
+  border-bottom-color: #424242;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+[data-theme='dark'] .versionItem {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme='dark'] .versionItem:hover {
+  background: #262626;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme='dark'] .versionItem.selected {
+  background: #111b26;
+  color: #1677ff;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .versionItemName {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme='dark'] .versionDescription {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+[data-theme='dark'] .versionMeta {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+[data-theme='dark'] .dropdownFooter {
+  background: #1f1f1f;
+  border-top-color: #424242;
+}
+
+/* 滚动条样式 */
+.versionList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.versionList::-webkit-scrollbar-track {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.versionList::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-emphasis-300);
+  border-radius: 3px;
+}
+
+.versionList::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-emphasis-400);
+}
+
+/* 焦点状态 */
+.versionItem:focus {
+  outline: none;
+  background: var(--ifm-color-emphasis-200);
+}
+
+/* 加载状态 */
+.versionSelector.loading .versionButton {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.versionSelector.loading .dropdownArrow {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

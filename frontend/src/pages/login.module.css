@@ -1,0 +1,307 @@
+/* 登录页面容器 */
+.loginContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1890ff;
+  padding: 20px;
+}
+
+/* 登录卡片 */
+.loginCard {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  min-height: 600px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* 左侧品牌区域 */
+.brandSection {
+  flex: 1;
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  color: white;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brandContent {
+  max-width: 400px;
+}
+
+.logo {
+  margin-bottom: 32px;
+}
+
+.brandTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.brandSubtitle {
+  font-size: 18px;
+  opacity: 0.9;
+  margin: 0 0 48px 0;
+  line-height: 1.5;
+}
+
+/* 特性列表 */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.featureIcon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.feature h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: white;
+}
+
+.feature p {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+/* 右侧表单区域 */
+.formSection {
+  flex: 1;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formContent {
+  max-width: 360px;
+  width: 100%;
+}
+
+.formTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+}
+
+.formSubtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0 0 32px 0;
+}
+
+/* 表单样式 */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1890ff;
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+/* 密码输入框容器 */
+.passwordWrapper {
+  position: relative;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #6b7280;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.passwordToggle:hover {
+  color: #1890ff;
+}
+
+/* 错误信息 */
+.error {
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626;
+  font-size: 14px;
+  margin-top: -8px;
+}
+
+/* 表单操作 */
+.formActions {
+  margin-top: 8px;
+}
+
+.loginButton {
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(24, 144, 255, 0.3);
+}
+
+.loginButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 表单底部 */
+.formFooter {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.link {
+  color: #1890ff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #40a9ff;
+  text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .loginContainer {
+    padding: 16px;
+  }
+  
+  .loginCard {
+    flex-direction: column;
+    max-width: 400px;
+    min-height: auto;
+  }
+  
+  .brandSection {
+    padding: 40px 32px;
+    text-align: center;
+  }
+  
+  .brandTitle {
+    font-size: 24px;
+  }
+  
+  .brandSubtitle {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .features {
+    gap: 16px;
+  }
+  
+  .feature {
+    justify-content: center;
+    text-align: left;
+  }
+  
+  .formSection {
+    padding: 40px 32px;
+  }
+  
+  .formTitle {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .formSubtitle {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginContainer {
+    padding: 12px;
+  }
+  
+  .brandSection,
+  .formSection {
+    padding: 32px 24px;
+  }
+  
+  .brandTitle {
+    font-size: 20px;
+  }
+  
+  .formTitle {
+    font-size: 20px;
+  }
+}

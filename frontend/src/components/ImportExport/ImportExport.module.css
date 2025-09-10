@@ -1,0 +1,775 @@
+/* 导入导出组件样式 */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--ifm-background-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 模式选择器 */
+.modeSelector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.modeButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--ifm-color-content-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.modeButton:hover {
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.modeButton.active {
+  color: var(--ifm-color-primary);
+  border-bottom-color: var(--ifm-color-primary);
+}
+
+.modeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 导入部分 */
+.importSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* 上传区域 */
+.uploadArea {
+  border: 2px dashed var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--ifm-color-emphasis-50);
+}
+
+.uploadArea:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-lightest);
+}
+
+.uploadArea.dragActive {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-lightest);
+  transform: scale(1.02);
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.uploadIcon {
+  font-size: 3rem;
+  opacity: 0.6;
+}
+
+.uploadHint {
+  color: var(--ifm-color-content-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* 配置部分 */
+.configSection {
+  background: var(--ifm-color-emphasis-50);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.configSection h3 {
+  margin: 0 0 1rem 0;
+  color: var(--ifm-color-content);
+  font-size: 1.1rem;
+}
+
+.configGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.configGrid label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ifm-color-content);
+}
+
+.configGrid select,
+.configGrid input[type="text"] {
+  padding: 0.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-content);
+  font-size: 0.9rem;
+}
+
+.configGrid input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* 文件列表 */
+.fileList {
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fileListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--ifm-color-emphasis-100);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.fileListHeader h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ifm-color-content);
+}
+
+.clearButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--ifm-color-danger);
+  background: transparent;
+  color: var(--ifm-color-danger);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background: var(--ifm-color-danger);
+  color: white;
+}
+
+.fileItem {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.fileItem:last-child {
+  border-bottom: none;
+}
+
+.fileInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.fileName {
+  font-weight: 500;
+  color: var(--ifm-color-content);
+  flex: 1;
+}
+
+.fileSize {
+  color: var(--ifm-color-content-secondary);
+  font-size: 0.9rem;
+  margin-right: 1rem;
+}
+
+.removeButton {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: var(--ifm-color-danger);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.removeButton:hover {
+  background: var(--ifm-color-danger-dark);
+  transform: scale(1.1);
+}
+
+/* 文件预览 */
+.filePreview {
+  background: var(--ifm-color-emphasis-50);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.previewMeta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.previewContent {
+  font-size: 0.9rem;
+  color: var(--ifm-color-content);
+  line-height: 1.5;
+  max-height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.previewContent::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(transparent, var(--ifm-color-emphasis-50));
+}
+
+/* 进度条 */
+.progressBar {
+  position: relative;
+  height: 8px;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--ifm-color-primary);
+  transition: width 0.3s ease;
+}
+
+.progressBar span {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+/* 结果显示 */
+.result {
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.result.success {
+  background: var(--ifm-color-success-lightest);
+  border: 1px solid var(--ifm-color-success-light);
+  color: var(--ifm-color-success-dark);
+}
+
+.result.error {
+  background: var(--ifm-color-danger-lightest);
+  border: 1px solid var(--ifm-color-danger-light);
+  color: var(--ifm-color-danger-dark);
+}
+
+.successIcon,
+.errorIcon {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.warnings,
+.errors {
+  margin-top: 0.5rem;
+}
+
+.warning,
+.error {
+  font-size: 0.8rem;
+  margin: 0.2rem 0;
+}
+
+.warning {
+  color: var(--ifm-color-warning-dark);
+}
+
+.error {
+  color: var(--ifm-color-danger-dark);
+}
+
+/* 批量操作状态 */
+.batchStatus {
+  background: var(--ifm-color-info-lightest);
+  border: 1px solid var(--ifm-color-info-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.batchStatus h3 {
+  margin: 0 0 1rem 0;
+  color: var(--ifm-color-info-dark);
+  font-size: 1rem;
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.statusItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.statusLabel {
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.statusValue {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--ifm-color-info-dark);
+}
+
+/* 导出部分 */
+.exportSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contentSection {
+  background: var(--ifm-color-emphasis-50);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.contentSection h3 {
+  margin: 0 0 1rem 0;
+  color: var(--ifm-color-content);
+  font-size: 1.1rem;
+}
+
+.contentTextarea {
+  width: 100%;
+  min-height: 300px;
+  padding: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-content);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.contentTextarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
+}
+
+.downloadLink {
+  margin-left: 1rem;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.downloadLink:hover {
+  text-decoration: underline;
+}
+
+/* 操作按钮 */
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.primaryButton {
+  padding: 0.75rem 2rem;
+  border: none;
+  background: var(--ifm-color-primary);
+  color: white;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 150px;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: var(--ifm-color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.primaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 历史记录 */
+.historySection {
+  margin-top: 2rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding-top: 2rem;
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.historyHeader h3 {
+  margin: 0;
+  color: var(--ifm-color-content);
+  font-size: 1.1rem;
+}
+
+.loadHistoryButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--ifm-color-primary);
+  background: transparent;
+  color: var(--ifm-color-primary);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.loadHistoryButton:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.historyPanel {
+  background: var(--ifm-color-emphasis-50);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.emptyHistory {
+  padding: 2rem;
+  text-align: center;
+  color: var(--ifm-color-content-secondary);
+  font-style: italic;
+}
+
+.historyList {
+  padding: 0;
+}
+
+.historyItem {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.historyItem:last-child {
+  border-bottom: none;
+}
+
+.historyInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.historyType {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.historyType.import {
+  background: var(--ifm-color-info-lightest);
+  color: var(--ifm-color-info-dark);
+}
+
+.historyType.export {
+  background: var(--ifm-color-success-lightest);
+  color: var(--ifm-color-success-dark);
+}
+
+.historyFileName {
+  font-weight: 500;
+  color: var(--ifm-color-content);
+  flex: 1;
+}
+
+.historyFormat {
+  padding: 0.25rem 0.5rem;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.historyStatus {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.historyStatus.success {
+  background: var(--ifm-color-success-lightest);
+  color: var(--ifm-color-success-dark);
+}
+
+.historyStatus.failed {
+  background: var(--ifm-color-danger-lightest);
+  color: var(--ifm-color-danger-dark);
+}
+
+.historyMeta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.historyErrors {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: var(--ifm-color-danger-lightest);
+  border-radius: 4px;
+}
+
+.historyError {
+  font-size: 0.8rem;
+  color: var(--ifm-color-danger-dark);
+  margin: 0.2rem 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .modeSelector {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .modeButton {
+    border-radius: 0;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  }
+  
+  .configGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .fileInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .previewMeta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .statusGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .historyInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .historyMeta {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .uploadArea {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .uploadArea:hover,
+[data-theme='dark'] .uploadArea.dragActive {
+  background: var(--ifm-color-primary-darkest);
+}
+
+[data-theme='dark'] .configSection,
+[data-theme='dark'] .contentSection {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .filePreview {
+  background: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .historyPanel {
+  background: var(--ifm-color-emphasis-100);
+}
+
+/* 打印样式 */
+@media print {
+  .container {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .modeSelector,
+  .actionButtons,
+  .historySection {
+    display: none;
+  }
+  
+  .uploadArea {
+    border-style: solid;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .uploadArea {
+    border-width: 3px;
+  }
+  
+  .primaryButton {
+    border: 2px solid currentColor;
+  }
+  
+  .result.success {
+    border-width: 2px;
+  }
+  
+  .result.error {
+    border-width: 2px;
+  }
+}
+
+/* 焦点样式 */
+.modeButton:focus,
+.clearButton:focus,
+.removeButton:focus,
+.primaryButton:focus,
+.loadHistoryButton:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.configGrid select:focus,
+.configGrid input:focus,
+.contentTextarea:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 1px;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fileItem,
+.result,
+.batchStatus {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.primaryButton:disabled {
+  animation: pulse 1.5s infinite;
+}
+
+/* 滚动条样式 */
+.historyPanel::-webkit-scrollbar,
+.contentTextarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.historyPanel::-webkit-scrollbar-track,
+.contentTextarea::-webkit-scrollbar-track {
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+}
+
+.historyPanel::-webkit-scrollbar-thumb,
+.contentTextarea::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-emphasis-400);
+  border-radius: 4px;
+}
+
+.historyPanel::-webkit-scrollbar-thumb:hover,
+.contentTextarea::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-emphasis-500);
+}

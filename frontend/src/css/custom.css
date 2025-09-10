@@ -1,0 +1,55 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #1976d2;
+  --ifm-color-primary-dark: #1565c0;
+  --ifm-color-primary-darker: #1360b7;
+  --ifm-color-primary-darkest: #0f4f96;
+  --ifm-color-primary-light: #1e88e5;
+  --ifm-color-primary-lighter: #2196f3;
+  --ifm-color-primary-lightest: #42a5f5;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(25, 118, 210, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #64b5f6;
+  --ifm-color-primary-dark: #42a5f5;
+  --ifm-color-primary-darker: #2196f3;
+  --ifm-color-primary-darkest: #1e88e5;
+  --ifm-color-primary-light: #90caf9;
+  --ifm-color-primary-lighter: #bbdefb;
+  --ifm-color-primary-lightest: #e3f2fd;
+  --docusaurus-highlighted-code-line-bg: rgba(100, 181, 246, 0.3);
+}
+
+/* 为固定导航栏添加页面主体顶部边距 */
+.main-wrapper {
+  padding-top: 64px;
+}
+
+/* 确保文档页面内容不被固定导航栏遮挡 */
+.docusaurus-wrapper {
+  padding-top: 64px;
+}
+
+/* 首页内容适配 */
+.hero {
+  padding-top: 2rem;
+}
+
+/* 搜索页面适配 */
+.searchPage {
+  padding-top: 64px;
+}
+
+/* 编辑器页面适配 */
+.editorPage {
+  padding-top: 64px;
+}

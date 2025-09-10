@@ -1,0 +1,345 @@
+/* 编辑器主组件样式 */
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.editorPane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.previewPane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+}
+
+.textareaContainer {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 16px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-900);
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: var(--ifm-color-emphasis-500);
+  font-style: italic;
+}
+
+.previewContent {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  background: var(--ifm-background-color);
+}
+
+.previewHeader {
+  padding: 8px 16px;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-600);
+  font-weight: 500;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 14px;
+}
+
+.error {
+  padding: 16px;
+  background: var(--ifm-color-danger-lightest);
+  color: var(--ifm-color-danger-dark);
+  border: 1px solid var(--ifm-color-danger-light);
+  border-radius: 4px;
+  margin: 16px;
+  font-size: 13px;
+}
+
+/* 分割模式样式 */
+.editor.split .editorPane {
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.editor.split .previewPane {
+  border-left: none;
+}
+
+/* 全屏编辑模式 */
+.editor.editOnly .previewPane {
+  display: none;
+}
+
+/* 全屏预览模式 */
+.editor.previewOnly .editorPane {
+  display: none;
+}
+
+.editor.previewOnly .previewPane {
+  border-left: none;
+}
+
+/* 行号显示 */
+.lineNumbers {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  background: var(--ifm-color-emphasis-100);
+  border-right: 1px solid var(--ifm-color-emphasis-200);
+  padding: 16px 8px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-600);
+  text-align: right;
+  user-select: none;
+  overflow: hidden;
+}
+
+.editor.showLineNumbers .textarea {
+  padding-left: 66px;
+}
+
+/* 搜索高亮 */
+.searchHighlight {
+  background: var(--ifm-color-warning-lightest);
+  border: 1px solid var(--ifm-color-warning-light);
+  border-radius: 2px;
+}
+
+.searchHighlight.current {
+  background: var(--ifm-color-primary-lightest);
+  border-color: var(--ifm-color-primary);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .editor {
+    border-radius: 4px;
+  }
+  
+  .content {
+    flex-direction: column;
+  }
+  
+  .previewPane {
+    border-left: none;
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+  }
+  
+  .editor.split .editorPane {
+    border-right: none;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  }
+  
+  .textarea {
+    padding: 12px;
+    font-size: 13px;
+  }
+  
+  .previewContent {
+    padding: 12px;
+  }
+  
+  .lineNumbers {
+    width: 40px;
+    padding: 12px 6px;
+    font-size: 11px;
+  }
+  
+  .editor.showLineNumbers .textarea {
+    padding-left: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+  .textarea {
+    padding: 8px;
+    font-size: 12px;
+  }
+  
+  .previewContent {
+    padding: 8px;
+  }
+  
+  .lineNumbers {
+    width: 35px;
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+  
+  .editor.showLineNumbers .textarea {
+    padding-left: 43px;
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .editor {
+  background: var(--ifm-background-color);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .textarea {
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-900);
+}
+
+[data-theme='dark'] .previewPane {
+  background: var(--ifm-background-surface-color);
+  border-left-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] .previewContent {
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .lineNumbers {
+  background: var(--ifm-color-emphasis-200);
+  border-right-color: var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .searchHighlight {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.5);
+}
+
+[data-theme='dark'] .searchHighlight.current {
+  background: rgba(0, 123, 255, 0.2);
+  border-color: rgba(0, 123, 255, 0.5);
+}
+
+/* 打印样式 */
+@media print {
+  .editor {
+    border: none;
+    box-shadow: none;
+  }
+  
+  .previewPane {
+    border: none;
+  }
+  
+  .toolbar,
+  .statusBar {
+    display: none;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .editor {
+    border-width: 2px;
+  }
+  
+  .previewPane,
+  .lineNumbers {
+    border-width: 2px;
+  }
+}
+
+/* 焦点样式 */
+.textarea:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: -2px;
+}
+
+/* 滚动条样式 */
+.textarea::-webkit-scrollbar,
+.previewContent::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.textarea::-webkit-scrollbar-track,
+.previewContent::-webkit-scrollbar-track {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.textarea::-webkit-scrollbar-thumb,
+.previewContent::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+}
+
+.textarea::-webkit-scrollbar-thumb:hover,
+.previewContent::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-emphasis-400);
+}
+
+/* 动画效果 */
+.editor {
+  transition: all 0.3s ease;
+}
+
+.previewContent {
+  transition: opacity 0.2s ease;
+}
+
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 无障碍支持 */
+@media (prefers-reduced-motion: reduce) {
+  .editor,
+  .previewContent,
+  .loading {
+    animation: none;
+    transition: none;
+  }
+}

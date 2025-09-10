@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1129" height="663" viewBox="0 0 1129 663">
+  <title>Focus on What Matters</title>
+  <defs>
+    <linearGradient id="treeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1976d2;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#42a5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#64b5f6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bbdefb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="screenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景圆形 -->
+  <circle cx="321" cy="321" r="321" fill="url(#backgroundGradient)" />
+  
+  <!-- 地面阴影 -->
+  <ellipse cx="559" cy="635.49998" rx="514" ry="27.50002" fill="#1565c0" />
+  <ellipse cx="558" cy="627" rx="460" ry="22" opacity="0.2" />
+  
+  <!-- 显示器底座 -->
+  <rect x="131" y="152.5" width="840" height="50" fill="url(#screenGradient)" />
+  
+  <!-- 显示器主体 -->
+  <path d="M166.5,727.3299A21.67009,21.67009,0,0,0,188.1701,749H984.8299A21.67009,21.67009,0,0,0,1006.5,727.3299V296h-840Z" transform="translate(-35.5 -118.5)" fill="url(#screenGradient)" />
+  
+  <!-- 显示器顶部 -->
+  <path d="M984.8299,236H188.1701A21.67009,21.67009,0,0,0,166.5,257.6701V296h840V257.6701A21.67009,21.67009,0,0,0,984.8299,236Z" transform="translate(-35.5 -118.5)" fill="url(#screenGradient)" />
+  <path d="M984.8299,236H188.1701A21.67009,21.67009,0,0,0,166.5,257.6701V296h840V257.6701A21.67009,21.67009,0,0,0,984.8299,236Z" transform="translate(-35.5 -118.5)" opacity="0.2" />
+  
+  <!-- 电源指示灯 -->
+  <circle cx="181" cy="147.5" r="13" fill="#42a5f5" />
+  <circle cx="181" cy="147.5" r="8" fill="#64b5f6" />
+  
+  <!-- 屏幕内容 - 文档树结构 -->
+  <g transform="translate(200, 200)">
+    <!-- 文件夹图标 -->
+    <g fill="url(#treeGradient)">
+      <!-- 根文件夹 -->
+      <rect x="20" y="20" width="60" height="40" rx="5" fill="#1976d2" />
+      <rect x="15" y="25" width="50" height="30" rx="3" fill="#42a5f5" />
+      <text x="40" y="42" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Docs</text>
+      
+      <!-- 连接线 -->
+      <line x1="40" y1="60" x2="40" y2="80" stroke="#1976d2" stroke-width="2" />
+      <line x1="40" y1="80" x2="200" y2="80" stroke="#1976d2" stroke-width="2" />
+      
+      <!-- 子文件夹1 -->
+      <line x1="80" y1="80" x2="80" y2="100" stroke="#1976d2" stroke-width="2" />
+      <rect x="60" y="100" width="40" height="25" rx="3" fill="#42a5f5" />
+      <text x="80" y="115" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">API</text>
+      
+      <!-- 子文件夹2 -->
+      <line x1="140" y1="80" x2="140" y2="100" stroke="#1976d2" stroke-width="2" />
+      <rect x="120" y="100" width="40" height="25" rx="3" fill="#42a5f5" />
+      <text x="140" y="115" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Guide</text>
+      
+      <!-- 子文件夹3 -->
+      <line x1="200" y1="80" x2="200" y2="100" stroke="#1976d2" stroke-width="2" />
+      <rect x="180" y="100" width="40" height="25" rx="3" fill="#42a5f5" />
+      <text x="200" y="115" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">FAQ</text>
+      
+      <!-- 文档文件 -->
+      <line x1="80" y1="125" x2="80" y2="145" stroke="#1976d2" stroke-width="1" />
+      <rect x="70" y="145" width="20" height="15" rx="2" fill="#64b5f6" />
+      <text x="80" y="155" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">md</text>
+      
+      <line x1="140" y1="125" x2="140" y2="145" stroke="#1976d2" stroke-width="1" />
+      <rect x="130" y="145" width="20" height="15" rx="2" fill="#64b5f6" />
+      <text x="140" y="155" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">md</text>
+      
+      <line x1="200" y1="125" x2="200" y2="145" stroke="#1976d2" stroke-width="1" />
+      <rect x="190" y="145" width="20" height="15" rx="2" fill="#64b5f6" />
+      <text x="200" y="155" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">md</text>
+    </g>
+    
+    <!-- 代码编辑器界面 -->
+    <g transform="translate(300, 20)">
+      <rect x="0" y="0" width="300" height="200" rx="8" fill="#0d47a1" stroke="#1976d2" stroke-width="2" />
+      <rect x="5" y="5" width="290" height="25" rx="3" fill="#1565c0" />
+      <circle cx="15" cy="17.5" r="4" fill="#f44336" />
+      <circle cx="30" cy="17.5" r="4" fill="#ff9800" />
+      <circle cx="45" cy="17.5" r="4" fill="#4caf50" />
+      
+      <!-- 代码内容 -->
+      <text x="10" y="50" font-family="monospace" font-size="10" fill="#64b5f6"># 达梦数据库文档</text>
+      <text x="10" y="65" font-family="monospace" font-size="10" fill="#90caf9">## 快速开始</text>
+      <text x="10" y="80" font-family="monospace" font-size="10" fill="#bbdefb">本文档将帮助您快速上手</text>
+      <text x="10" y="95" font-family="monospace" font-size="10" fill="#bbdefb">达梦数据库的使用。</text>
+      
+      <text x="10" y="120" font-family="monospace" font-size="10" fill="#90caf9">### 安装步骤</text>
+      <text x="10" y="135" font-family="monospace" font-size="10" fill="#bbdefb">1. 下载安装包</text>
+      <text x="10" y="150" font-family="monospace" font-size="10" fill="#bbdefb">2. 运行安装程序</text>
+      <text x="10" y="165" font-family="monospace" font-size="10" fill="#bbdefb">3. 配置数据库</text>
+    </g>
+  </g>
+  
+  <!-- 装饰性元素 -->
+  <circle cx="100" cy="100" r="15" fill="#42a5f5" opacity="0.6" />
+  <circle cx="950" cy="150" r="20" fill="#64b5f6" opacity="0.5" />
+  <circle cx="850" cy="500" r="12" fill="#1976d2" opacity="0.7" />
+</svg>

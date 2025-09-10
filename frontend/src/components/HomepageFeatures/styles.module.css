@@ -1,0 +1,60 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+  width: 100%;
+  background: #f8f9fa;
+}
+
+.featureSvg {
+  height: 120px;
+  width: 120px;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.featureSvg:hover {
+  transform: scale(1.1);
+}
+
+/* 为每个功能卡片添加样式 */
+.features .col {
+  padding: 2rem 1rem;
+}
+
+.features .col:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.features h3 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.features p {
+  color: #6c757d;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 996px) {
+  .features {
+    padding: 3rem 0;
+  }
+  
+  .featureSvg {
+    height: 100px;
+    width: 100px;
+  }
+  
+  .features h3 {
+    font-size: 1.3rem;
+  }
+  
+  .features p {
+    font-size: 0.95rem;
+  }
+}
