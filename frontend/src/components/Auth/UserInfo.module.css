@@ -98,6 +98,11 @@
   color: var(--ifm-color-danger-contrast-foreground);
 }
 
+.subAdminBadge {
+  background-color: var(--ifm-color-primary-contrast-background);
+  color: var(--ifm-color-primary-contrast-foreground);
+}
+
 .editorBadge {
   background-color: var(--ifm-color-warning-contrast-background);
   color: var(--ifm-color-warning-contrast-foreground);

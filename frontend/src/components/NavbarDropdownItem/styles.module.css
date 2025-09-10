@@ -1,0 +1,42 @@
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  color: var(--ifm-navbar-link-color);
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  margin: 2px 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.dropdownItem:hover {
+  background-color: var(--ifm-navbar-link-hover-color);
+  color: var(--ifm-navbar-link-hover-color);
+}
+
+.icon {
+  margin-right: 8px;
+  font-size: 16px;
+  color: var(--ifm-color-primary);
+  flex-shrink: 0;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 深色主题适配 */
+[data-theme='dark'] .dropdownItem {
+  color: var(--ifm-navbar-link-color);
+}
+
+[data-theme='dark'] .dropdownItem:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-navbar-link-hover-color);
+}
+
+[data-theme='dark'] .icon {
+  color: var(--ifm-color-primary-light);
+}

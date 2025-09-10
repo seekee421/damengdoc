@@ -1,0 +1,214 @@
+/* 产品下拉菜单组件样式 */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trigger:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.arrow {
+  transition: transform 0.2s ease;
+}
+
+.open .arrow {
+  transform: rotate(180deg);
+}
+
+.content {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.open .content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.15), 0 4px 16px rgba(22, 119, 255, 0.1);
+  border: 1px solid #1677ff;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme='dark'] .container {
+  background: white;
+  border-color: #1677ff;
+  box-shadow: 0 8px 32px rgba(22, 119, 255, 0.15), 0 4px 16px rgba(22, 119, 255, 0.1);
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1677ff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-theme='dark'] .sectionTitle {
+  color: #1677ff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: #f0f8ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(22, 119, 255, 0.15);
+  text-decoration: none;
+  color: inherit;
+  border-left: 3px solid #1677ff;
+  padding-left: 13px;
+}
+
+[data-theme='dark'] .item:hover {
+  background: #f0f8ff;
+  color: inherit;
+  border-left: 3px solid #1677ff;
+  padding-left: 13px;
+}
+
+.icon {
+  font-size: 24px;
+  margin-right: 12px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.itemContent {
+  flex: 1;
+}
+
+.itemTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.item:hover .itemTitle {
+  color: #1677ff;
+}
+
+[data-theme='dark'] .itemTitle {
+  color: #1a1a1a;
+}
+
+[data-theme='dark'] .item:hover .itemTitle {
+  color: #1677ff;
+}
+
+.itemDescription {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+  margin: 0;
+}
+
+[data-theme='dark'] .itemDescription {
+  color: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    min-width: 320px;
+    padding: 16px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .item {
+    padding: 12px;
+  }
+  
+  .icon {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+  
+  .itemTitle {
+    font-size: 14px;
+  }
+  
+  .itemDescription {
+    font-size: 12px;
+  }
+}
+
+/* 确保下拉菜单在移动端正确显示 */
+@media (max-width: 996px) {
+  .content {
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  
+  .open .content {
+    transform: translateX(-50%) translateY(0);
+  }
+}

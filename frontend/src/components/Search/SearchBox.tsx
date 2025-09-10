@@ -223,7 +223,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
                       )}
                     </div>
                     <div className={styles.resultScore}>
-                      {Math.round(result.score * 100)}%
+                      {Math.round(Math.min(Math.max(result.score * 100, 0), 100))}%
                     </div>
                   </div>
                 ))}

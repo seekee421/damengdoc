@@ -1,0 +1,453 @@
+/* 自定义导航栏样式 */
+
+/* 导航栏标题颜色设置 */
+.navbar__title {
+  color: #1890ff !important;
+  font-weight: bold;
+}
+
+[data-theme='dark'] .navbar__title {
+  color: #40a9ff !important;
+}
+
+/* Ant Design 图标样式 */
+.navbar-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: var(--ifm-navbar-link-color);
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  margin: 2px 0;
+}
+
+.navbar-dropdown-item:hover {
+  background-color: var(--ifm-navbar-link-hover-color);
+  color: var(--ifm-navbar-link-hover-color);
+  text-decoration: none;
+}
+
+.navbar-dropdown-item .anticon {
+  margin-right: 8px;
+  font-size: 16px;
+  color: var(--ifm-color-primary);
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ant Design 图标 SVG */
+.anticon-database::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIGZpbGw9ImN1cnJlbnRDb2xvciIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNODMyIDY0SDIwOGMtMTcuNyAwLTMyIDE0LjMtMzIgMzJ2ODMyYzAgMTcuNyAxNC4zIDMyIDMyIDMyaDYyNGMxNy43IDAgMzItMTQuMyAzMi0zMlY5NmMwLTE3LjctMTQuMy0zMi0zMi0zMnptLTYwIDcydjIwOEgyNTJWMTM2aDUyMHptMCAyNzJ2MjA4SDI1MlY0MDhoNTIwem0wIDI3MnYyMDhIMjUyVjY4MGg1MjB6Ii8+PC9zdmc+');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.anticon-cloud::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIGZpbGw9ImN1cnJlbnRDb2xvciIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNODExLjQgNDE4LjdDNzY1LjYgMjk3IDY0NC4yIDIxMCA0OTYgMjEwYy0xNjIuNCAwLTI5NC43IDEwMS4xLTM0Ny4zIDI0My4yQzEwNi4yIDQ2OS4zIDY0IDUyMy45IDY0IDU4OGMwIDc3LjEgNjIuOSAxNDAgMTQwIDE0MGg1ODRjNzcuMSAwIDE0MC02Mi45IDE0MC0xNDAgMC02NC4xLTQyLjItMTE4LjctOTkuNi0xMzQuM3oiLz48L3N2Zz4=');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.anticon-tool::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIGZpbGw9ImN1cnJlbnRDb2xvciIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNODc2IDM3OC4zYy0xMi4yLTEyLjItMjguNS0xOC45LTQ1LjctMTguOUg2NTZjLTM1LjMgMC02NCAxNC4zLTY0IDMydjI0MEg0ODBjLTE3LjcgMC0zMiAxNC4zLTMyIDMydjE2MGMwIDE3LjcgMTQuMyAzMiAzMiAzMmgxNzZjMTcuNyAwIDMyLTE0LjMgMzItMzJWNjcyaDExMmMxNy43IDAgMzItMTQuMyAzMi0zMlY0MjRjMC0xNy4yLTYuNy0zMy41LTE4LjktNDUuN3oiLz48L3N2Zz4=');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.anticon-bar-chart::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIGZpbGw9ImN1cnJlbnRDb2xvciIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNODg4IDc5Mkg5NmMtMTcuNyAwLTMyIDE0LjMtMzIgMzJzMTQuMyAzMiAzMiAzMmg3OTJjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJ6TTI0MCA2NDBjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzUyYzAtMTcuNy0xNC4zLTMyLTMyLTMycy0zMiAxNC4zLTMyIDMydjI1NmMwIDE3LjcgMTQuMyAzMiAzMiAzMnptMTkyIDY0YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjI4OGMwLTE3LjctMTQuMy0zMi0zMi0zMnMtMzIgMTQuMy0zMiAzMnYzODRjMCAxNy43IDE0LjMgMzIgMzIgMzJ6bTE5MiA2NGMxNy43IDAgMzItMTQuMyAzMi0zMlYyMjRjMC0xNy43LTE0LjMtMzItMzItMzJzLTMyIDE0LjMtMzIgMzJ2NDQ4YzAgMTcuNyAxNC4zIDMyIDMyIDMyem0xOTIgNjRjMTcuNyAwIDMyLTE0LjMgMzItMzJWMTYwYzAtMTcuNy0xNC4zLTMyLTMyLTMycy0zMiAxNC4zLTMyIDMydjUxMmMwIDE3LjcgMTQuMyAzMiAzMiAzMnoiLz48L3N2Zz4=');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.anticon-setting::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIGZpbGw9ImN1cnJlbnRDb2xvciIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOTI0IDUxMmMwLTIyLjMtMTguMS00MC40LTQwLjQtNDBINjQwYy0yMi4zIDAtNDAuNCAzNi4xLTQwLjQgNDBzMTguMSA0MCA0MC40IDQwaDI0My42YzIyLjMgMCA0MC40LTE3LjcgNDAuNC00MHptLTI4NC0xNzZjMC0yMi4zLTE4LjEtNDAuNC00MC40LTQwSDM4NGMtMjIuMyAwLTQwLjQgMTguMS00MC40IDQwLjRzMTguMSA0MC40IDQwLjQgNDAuNGgyMTUuNmMyMi4zIDAgNDAuNC0xOC4xIDQwLjQtNDAuNHptMCAxNzZjMC0yMi4zLTE4LjEtNDAuNC00MC40LTQwSDM4NGMtMjIuMyAwLTQwLjQgMTguMS00MC40IDQwLjRzMTguMSA0MC40IDQwLjQgNDAuNGgyMTUuNmMyMi4zIDAgNDAuNC0xOC4xIDQwLjQtNDAuNHoiLz48L3N2Zz4=');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.anticon-rocket::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIGZpbGw9ImN1cnJlbnRDb2xvciIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNODc0IDMzMmMtMzUuMy0zOS44LTkxLjItNjQtMTUwLTY0SDMwMGMtNTguOCAwLTExNC43IDI0LjItMTUwIDY0LTM1LjMgMzkuOC01NCA5My4yLTU0IDE1MnYxNjBjMCA1OC44IDE4LjcgMTEyLjIgNTQgMTUyIDM1LjMgMzkuOCA5MS4yIDY0IDE1MCA2NGg0MjRjNTguOCAwIDExNC43LTI0LjIgMTUwLTY0IDM1LjMtMzkuOCA1NC05My4yIDU0LTE1MlY0ODRjMC01OC44LTE4LjctMTEyLjItNTQtMTUyem0tMjIyIDIwOGMtNDQuMiAwLTgwLTM1LjgtODAtODBzMzUuOC04MCA4MC04MCA4MCAzNS44IDgwIDgwLTM1LjggODAtODAgODB6Ii8+PC9zdmc+');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 深色主题适配 */
+[data-theme='dark'] .navbar-dropdown-item {
+  color: var(--ifm-navbar-link-color);
+}
+
+[data-theme='dark'] .navbar-dropdown-item:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-navbar-link-hover-color);
+}
+
+[data-theme='dark'] .navbar-dropdown-item .anticon {
+  color: var(--ifm-color-primary-light);
+}
+
+/* 导航栏基础样式 */
+.navbar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* 下拉菜单标题样式 */
+.navbar__dropdown-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 16px;
+  margin: 0;
+  background: #f8f9fa;
+  border-radius: 4px;
+  cursor: default;
+}
+
+[data-theme='dark'] .navbar__dropdown-header {
+  color: #a0aec0;
+  background: #4a5568;
+}
+
+/* 下拉菜单分隔线 */
+.navbar__dropdown-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 8px 0;
+}
+
+[data-theme='dark'] .navbar__dropdown-divider {
+  background: #4a5568;
+}
+
+/* 下拉菜单项样式增强 */
+.navbar__item .dropdown__menu .dropdown__link {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 2px 8px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.navbar__item .dropdown__menu .dropdown__link:hover {
+  background: #f1f5f9;
+  transform: translateX(4px);
+}
+
+[data-theme='dark'] .navbar__item .dropdown__menu .dropdown__link:hover {
+  background: #4a5568;
+}
+
+/* 下拉菜单容器样式 */
+.navbar__item .dropdown__menu {
+  min-width: 280px;
+  padding: 12px 0;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+[data-theme='dark'] .navbar__item .dropdown__menu {
+  background: #2d3748;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* 下拉菜单容器 */
+.navbar__dropdown-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  padding: 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* 下拉菜单区域 */
+.navbar__dropdown-section {
+  margin-bottom: 24px;
+}
+
+.navbar__dropdown-section:last-child {
+  margin-bottom: 0;
+}
+
+.navbar__dropdown-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 网格布局 */
+.navbar__dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* 下拉菜单项 */
+.navbar__dropdown-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar__dropdown-item:hover {
+  background: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 图标样式 */
+.navbar__dropdown-icon {
+  font-size: 24px;
+  margin-right: 12px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* 文本内容 */
+.navbar__dropdown-item strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.navbar__dropdown-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 登录和试用按钮样式 */
+.navbar__login-btn {
+  color: #1976d2 !important;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.navbar__login-btn:hover {
+  background: rgba(25, 118, 210, 0.08);
+  text-decoration: none;
+}
+
+.navbar__trial-btn {
+  background: linear-gradient(135deg, #1976d2, #1565c0) !important;
+  color: white !important;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+}
+
+.navbar__trial-btn:hover {
+  background: linear-gradient(135deg, #1565c0, #0d47a1) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.4);
+  text-decoration: none;
+}
+
+/* 右侧按钮样式 */
+.navbar__item--right {
+  margin-left: auto;
+}
+
+.navbar__link--login {
+  color: var(--ifm-navbar-link-color);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.navbar__link--login:hover {
+  background: rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .navbar__link--login:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar__link--trial {
+  background: var(--ifm-color-primary);
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.navbar__link--trial:hover {
+  background: var(--ifm-color-primary-dark);
+  text-decoration: none;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .navbar__item .dropdown__menu {
+    min-width: 240px;
+  }
+  
+  .navbar__item .dropdown__menu .dropdown__link {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .navbar__dropdown-header {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  
+  .navbar__dropdown-content {
+    min-width: 320px;
+    padding: 16px;
+  }
+  
+  .navbar__dropdown-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .navbar__dropdown-item {
+    padding: 12px;
+  }
+  
+  .navbar__dropdown-icon {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+  
+  .navbar__dropdown-item strong {
+    font-size: 14px;
+  }
+  
+  .navbar__dropdown-item p {
+    font-size: 12px;
+  }
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .navbar__dropdown-content {
+  background: #2d3748;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .navbar__dropdown-section h3 {
+  color: #a0aec0;
+}
+
+[data-theme='dark'] .navbar__dropdown-item:hover {
+  background: #4a5568;
+}
+
+[data-theme='dark'] .navbar__dropdown-item strong {
+  color: #f7fafc;
+}
+
+[data-theme='dark'] .navbar__dropdown-item p {
+  color: #a0aec0;
+}
+
+/* 下拉菜单动画 */
+.navbar__item--dropdown .navbar__link:after {
+  content: '';
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+  transform: rotate(45deg);
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.navbar__item--dropdown:hover .navbar__link:after {
+  transform: rotate(225deg);
+}
+
+/* 修复下拉菜单定位 */
+.navbar__item--dropdown .navbar__dropdown {
+  top: calc(100% + 8px);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 导航栏项目间距 */
+.navbar__item {
+  margin: 0 4px;
+}
+
+.navbar__link {
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.navbar__link:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .navbar__link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

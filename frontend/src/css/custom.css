@@ -4,6 +4,9 @@
  * work well for content-centric websites.
  */
 
+/* 导入自定义导航栏样式 */
+@import './navbar.css';
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #1976d2;
@@ -39,9 +42,10 @@
   padding-top: 64px;
 }
 
-/* 首页内容适配 */
+/* 首页内容适配 - 移除顶部padding，让蓝色背景填充白条 */
 .hero {
-  padding-top: 2rem;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 /* 搜索页面适配 */

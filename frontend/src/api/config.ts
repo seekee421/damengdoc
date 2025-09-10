@@ -1,7 +1,7 @@
 // API配置
 export const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-production-domain.com'
-  : 'http://localhost:8080';
+  ? 'https://your-production-domain.com/api'
+  : 'http://localhost:8080/api';
 
 // API请求配置
 export const API_CONFIG = {

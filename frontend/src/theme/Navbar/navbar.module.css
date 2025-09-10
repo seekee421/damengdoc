@@ -1,21 +1,11 @@
-/* 整体导航栏容器 */
+/* 整体导航栏容器 - 移除可能与原生导航栏冲突的样式 */
 .navbarWrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  padding: 0 24px;
-  min-height: 64px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 20px;
+  /* 移除了position, background, border, box-shadow等可能冲突的样式 */
 }
 
 .navbarWrapper::before {
@@ -44,16 +34,18 @@
   display: flex;
   align-items: center;
   gap: 32px;
-  flex: 1;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 /* 导航栏右侧扩展区域 */
 .navbarExtras {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: nowrap;
   min-width: 0;
+  margin-left: auto;
 }
 
 /* 修复Docusaurus原生下拉菜单层级 */
@@ -354,14 +346,14 @@
 }
 
 .modalContent {
-  background: var(--ifm-background-color);
-  border-radius: 8px;
+  background: #ffffff;
+  border-radius: 12px;
   width: 90%;
   max-width: 420px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15), 0 10px 10px -5px rgba(59, 130, 246, 0.08);
+  border: 1px solid #dbeafe;
   animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -381,13 +373,16 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  border-bottom: 1px solid #e0f2fe;
+  background: linear-gradient(135deg, #f8faff 0%, #f0f9ff 100%);
+  border-radius: 12px 12px 0 0;
 }
 
 .modalHeader h2 {
   margin: 0;
-  color: var(--ifm-color-emphasis-800);
+  color: #1e40af;
   font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .closeButton {
@@ -395,23 +390,27 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--ifm-color-emphasis-600);
+  color: #64748b;
   padding: 0;
   width: 2rem;
   height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
 .closeButton:hover {
-  background-color: var(--ifm-color-emphasis-200);
+  background-color: #e0f2fe;
+  color: #1e40af;
+  transform: scale(1.05);
 }
 
 .modalBody {
   padding: 1.5rem;
+  background: #ffffff;
+  color: #1f2937;
 }
 
 /* 响应式设计 */
@@ -453,22 +452,115 @@
   }
 }
 
+/* 自定义导航栏扩展样式 */
+.customNavbarExtension {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.customNavbarExtension > * {
+  pointer-events: auto;
+}
+
+/* 认证区域样式调整 */
+.authSection {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
 @media (max-width: 480px) {
   .modalHeader h2 {
     font-size: 1.1rem;
   }
 }
 
-/* 暗色主题适配 */
+/* 暗色主题适配 - 保持白底蓝色系 */
 [data-theme='dark'] .modal {
   background-color: rgba(0, 0, 0, 0.75);
 }
 
 [data-theme='dark'] .modalContent {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.2);
-  border-color: var(--ifm-color-emphasis-300);
+  background: #ffffff;
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15), 0 10px 10px -5px rgba(59, 130, 246, 0.08);
+  border-color: #dbeafe;
+}
+
+[data-theme='dark'] .modalHeader {
+  background: linear-gradient(135deg, #f8faff 0%, #f0f9ff 100%);
+  border-bottom-color: #e0f2fe;
+}
+
+[data-theme='dark'] .modalHeader h2 {
+  color: #1e40af;
+}
+
+[data-theme='dark'] .closeButton {
+  color: #64748b;
 }
 
 [data-theme='dark'] .closeButton:hover {
-  background-color: var(--ifm-color-emphasis-300);
+  background-color: #e0f2fe;
+  color: #1e40af;
+}
+
+[data-theme='dark'] .modalBody {
+  background: #ffffff;
+  color: #1f2937;
+}
+
+/* 覆盖Docusaurus原生导航栏样式 */
+:global(.navbar) {
+  padding: 0 !important;
+}
+
+:global(.navbar__inner) {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+:global(.navbar__brand) {
+  margin-right: 1rem !important;
+}
+
+:global(.navbar__items) {
+  gap: 0.5rem !important;
+}
+
+:global(.navbar__items--right) {
+  margin-left: 1rem !important;
+  gap: 0.75rem !important;
+}
+
+:global(.navbar__item) {
+  margin: 0 !important;
+  padding: 0 0.5rem !important;
+}
+
+:global(.navbar__link) {
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+:global(.navbar__link:hover) {
+  background-color: var(--ifm-color-emphasis-100) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+:global(.dropdown__toggle) {
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px !important;
+}
+
+:global(.dropdown__toggle:hover) {
+  background-color: var(--ifm-color-emphasis-100) !important;
 }

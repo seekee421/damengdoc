@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from '@docusaurus/router';
 import { useAuth } from '../../contexts/AuthContext';
 import { AdminProvider, useAdmin, navigateToPage, pageConfigs } from '../../contexts/AdminContext';
 import ProtectedRoute from '../../components/Auth/ProtectedRoute';
 import styles from './index.module.css';
 import UsersManagement from './users';
-import DocsManagement from './docs';
+import DocsManagement from './docs/index';
 import SystemSettings from './settings';
 import DataStatistics from './stats';
 
@@ -141,6 +142,7 @@ const recentActivities = [
 
 const AdminDashboardContent: React.FC = () => {
   const { user } = useAuth();
+  const location = useLocation();
   const { state, setCurrentPage, setActiveMenuItem, toggleSidebar, setBreadcrumb } = useAdmin();
   const [expandedMenus, setExpandedMenus] = useState<string[]>(['users']);
   const [selectedMenuItem, setSelectedMenuItem] = useState(state.activeMenuItem);
@@ -151,6 +153,24 @@ const AdminDashboardContent: React.FC = () => {
     navigateToPage(menuId, setCurrentPage, setActiveMenuItem, setBreadcrumb);
     setSelectedMenuItem(menuId);
   };
+
+  // 根据URL路径设置当前页面
+  useEffect(() => {
+    const pathname = location.pathname;
+    let currentPage = 'dashboard';
+    
+    if (pathname.startsWith('/admin/docs')) {
+      currentPage = 'docs';
+    } else if (pathname.startsWith('/admin/users')) {
+      currentPage = 'users';
+    } else if (pathname.startsWith('/admin/analytics')) {
+      currentPage = 'analytics';
+    } else if (pathname.startsWith('/admin/settings')) {
+      currentPage = 'settings';
+    }
+    
+    navigateToPage(currentPage, setCurrentPage, setActiveMenuItem, setBreadcrumb);
+  }, [location.pathname, setCurrentPage, setActiveMenuItem, setBreadcrumb]);
 
   // 同步状态
   useEffect(() => {

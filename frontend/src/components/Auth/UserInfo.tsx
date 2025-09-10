@@ -33,13 +33,21 @@ const UserInfo: React.FC<UserInfoProps> = ({ onLoginClick }) => {
     };
   }, []);
 
+  // 获取用户的主要角色（优先级：ADMIN > EDITOR > VIEWER）
+  const getPrimaryRole = (roles: string[] = []) => {
+    if (roles.includes('ADMIN')) return 'ADMIN';
+    if (roles.includes('EDITOR')) return 'EDITOR';
+    if (roles.includes('VIEWER')) return 'VIEWER';
+    return roles[0] || 'VIEWER';
+  };
+
   const getRoleDisplayName = (role: string) => {
     switch (role) {
-      case 'admin':
+      case 'ADMIN':
         return '管理员';
-      case 'editor':
+      case 'EDITOR':
         return '编辑员';
-      case 'viewer':
+      case 'VIEWER':
         return '查看者';
       default:
         return role;
@@ -48,11 +56,11 @@ const UserInfo: React.FC<UserInfoProps> = ({ onLoginClick }) => {
 
   const getRoleBadgeClass = (role: string) => {
     switch (role) {
-      case 'admin':
+      case 'ADMIN':
         return styles.adminBadge;
-      case 'editor':
+      case 'EDITOR':
         return styles.editorBadge;
-      case 'viewer':
+      case 'VIEWER':
         return styles.viewerBadge;
       default:
         return styles.defaultBadge;
@@ -95,8 +103,8 @@ const UserInfo: React.FC<UserInfoProps> = ({ onLoginClick }) => {
         </div>
         <div className={styles.userDetails}>
           <span className={styles.username}>{user?.username}</span>
-          <span className={`${styles.roleBadge} ${getRoleBadgeClass(user?.role || '')}`}>
-            {getRoleDisplayName(user?.role || '')}
+          <span className={`${styles.roleBadge} ${getRoleBadgeClass(getPrimaryRole(user?.roles))}`}>
+            {getRoleDisplayName(getPrimaryRole(user?.roles))}
           </span>
         </div>
         <span className={styles.dropdownIcon}>▼</span>
@@ -118,8 +126,8 @@ const UserInfo: React.FC<UserInfoProps> = ({ onLoginClick }) => {
               <div className={styles.profileInfo}>
                 <div className={styles.profileName}>{user?.username}</div>
                 <div className={styles.profileEmail}>{user?.email}</div>
-                <div className={`${styles.profileRole} ${getRoleBadgeClass(user?.role || '')}`}>
-                  {getRoleDisplayName(user?.role || '')}
+                <div className={`${styles.profileRole} ${getRoleBadgeClass(getPrimaryRole(user?.roles))}`}>
+                  {getRoleDisplayName(getPrimaryRole(user?.roles))}
                 </div>
               </div>
             </div>

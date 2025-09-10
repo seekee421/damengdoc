@@ -14,7 +14,7 @@ import {
   FireOutlined, 
   BulbOutlined 
 } from '@ant-design/icons';
-import styles from './search.module.css';
+import styles from './advanced-search.module.css';
 
 interface SearchPageProps {
   location?: {

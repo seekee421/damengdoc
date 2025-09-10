@@ -7,11 +7,13 @@
 
 .heroBanner {
   position: relative;
-  padding: 6rem 0;
+  padding: 8rem 0 6rem 0; /* 增加顶部padding来填充导航栏下方空间 */
+  margin-top: -64px; /* 向上偏移，覆盖白条区域 */
+  padding-top: calc(8rem + 64px); /* 补偿margin-top，确保内容位置正确 */
   text-align: center;
   overflow: hidden;
   background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
-  min-height: 80vh;
+  min-height: calc(80vh + 64px); /* 增加高度来覆盖白条 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -453,6 +455,7 @@
   font-size: 4rem;
   font-weight: 900;
   margin-bottom: 2rem;
+  margin-top: -3rem; /* 上移标题，与版本选择器对齐 */
   color: #ffffff;
   text-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.3);
   line-height: 1.1;

@@ -79,9 +79,27 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: ['en', 'zh'],
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+      },
+    ],
+  ],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
+
     navbar: {
       title: '达梦数据库文档中心',
       logo: {
@@ -90,24 +108,199 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          type: 'dropdown',
+          label: '产品',
           position: 'left',
-          label: '产品文档',
+          items: [
+            {
+              type: 'html',
+              value: '<div class="navbar__dropdown-header">数据库产品</div>',
+            },
+            {
+              type: 'html',
+              value: '<a href="/products/dm8" class="navbar-dropdown-item"><span class="anticon anticon-database"></span>DM8 数据库</a>',
+            },
+            {
+              type: 'html',
+              value: '<a href="/products/dm-cloud" class="navbar-dropdown-item"><span class="anticon anticon-cloud"></span>DM Cloud 云数据库</a>',
+            },
+            {
+              type: 'html',
+              value: '<div class="navbar__dropdown-divider"></div>',
+            },
+            {
+              type: 'html',
+              value: '<div class="navbar__dropdown-header">开发工具</div>',
+            },
+            {
+              type: 'html',
+              value: '<a href="/tools/dma" class="navbar-dropdown-item"><span class="anticon anticon-tool"></span>DM 管理工具 (DMA)</a>',
+            },
+            {
+              type: 'html',
+              value: '<a href="/tools/dms" class="navbar-dropdown-item"><span class="anticon anticon-bar-chart"></span>数据迁移工具 (DMS)</a>',
+            },
+            {
+              type: 'html',
+              value: '<a href="/tools/ddc" class="navbar-dropdown-item"><span class="anticon anticon-setting"></span>开发者工具 (DDC)</a>',
+            },
+            {
+              type: 'html',
+              value: '<a href="/tools/das" class="navbar-dropdown-item"><span class="anticon anticon-rocket"></span>自动化运维 (DAS)</a>',
+            },
+          ],
         },
-
-        {to: '/blog', label: '技术博客', position: 'left'},
-        {to: '/search', label: '🔍 搜索', position: 'left'},
-        {to: '/editor', label: '📝 编辑器', position: 'left'},
-        {to: '/admin', label: '🔧 管理后台', position: 'left'},
+        {
+          type: 'dropdown',
+          label: '解决方案',
+          position: 'left',
+          items: [
+            {
+              label: '金融行业',
+              href: '/solutions/finance',
+            },
+            {
+              label: '政府机构',
+              href: '/solutions/government',
+            },
+            {
+              label: '制造业',
+              href: '/solutions/manufacturing',
+            },
+            {
+              label: '电信运营商',
+              href: '/solutions/telecom',
+            },
+          ],
+        },
+        {
+          type: 'dropdown',
+          label: '客户',
+          position: 'left',
+          items: [
+            {
+              label: '成功案例',
+              href: '/customers/cases',
+            },
+            {
+              label: '客户故事',
+              href: '/customers/stories',
+            },
+            {
+              label: '合作伙伴',
+              href: '/customers/partners',
+            },
+          ],
+        },
+        {
+          type: 'dropdown',
+          label: '合作伙伴',
+          position: 'left',
+          items: [
+            {
+              label: '技术合作',
+              href: '/partners/technology',
+            },
+            {
+              label: '渠道合作',
+              href: '/partners/channel',
+            },
+            {
+              label: '生态合作',
+              href: '/partners/ecosystem',
+            },
+          ],
+        },
+        {
+          type: 'dropdown',
+          label: '资源与服务',
+          position: 'left',
+          items: [
+            {
+              label: '下载中心',
+              href: '/downloads',
+            },
+            {
+              label: '培训认证',
+              href: '/training',
+            },
+            {
+              label: '技术支持',
+              href: '/support',
+            },
+            {
+              label: '开发者社区',
+              href: '/community',
+            },
+          ],
+        },
+        {
+          type: 'dropdown',
+          label: '文档',
+          position: 'left',
+          items: [
+            {
+              type: 'doc',
+              label: '产品文档',
+              docId: 'intro',
+            },
+            {
+              label: 'API 参考',
+              href: 'https://www.dameng.com/docs/api',
+            },
+            {
+              label: '最佳实践',
+              href: 'https://www.dameng.com/docs/best-practices',
+            },
+            {
+              label: '示例代码',
+              href: 'https://github.com/dameng/examples',
+            },
+          ],
+        },
+        {
+          type: 'dropdown',
+          label: '社区',
+          position: 'left',
+          items: [
+            {
+              label: '技术论坛',
+              href: 'https://eco.dameng.com',
+            },
+            {
+              label: '开发者社区',
+              href: 'https://eco.dameng.com/community',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/dameng',
+            },
+          ],
+        },
         {
           type: 'localeDropdown',
+          position: 'right',
+        },
+        {
+          type: 'search',
           position: 'right',
         },
         {
           href: 'https://www.dameng.com',
           label: '官网',
           position: 'right',
+        },
+        {
+          label: '登录 / 注册',
+          href: '/login',
+          position: 'right',
+          className: 'navbar__login-btn',
+        },
+        {
+          label: '免费试用',
+          href: '/trial',
+          position: 'right',
+          className: 'navbar__trial-btn',
         },
       ],
     },
@@ -131,7 +324,7 @@ const config: Config = {
             },
             {
               label: '安装指南',
-              to: '/docs/installation',
+              href: 'https://www.dameng.com/docs/installation',
             },
           ],
         },
@@ -140,19 +333,19 @@ const config: Config = {
           items: [
             {
               label: 'API 文档',
-              to: '/docs/api',
+              href: 'https://www.dameng.com/docs/api',
             },
             {
               label: 'SDK 下载',
-              to: '/docs/sdk',
+              href: 'https://www.dameng.com/download/sdk',
             },
             {
               label: '示例代码',
-              to: '/docs/examples',
+              href: 'https://github.com/dameng/examples',
             },
             {
               label: '最佳实践',
-              to: '/docs/best-practices',
+              href: 'https://www.dameng.com/docs/best-practices',
             },
           ],
         },

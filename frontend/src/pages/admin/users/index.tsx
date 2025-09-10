@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { JSX, useState } from 'react';
+import Layout from '@theme/Layout';
+import ProtectedRoute from '../../../components/Auth/ProtectedRoute';
 import styles from '../index.module.css';
 
 type IconName = 'users' | 'shield' | 'key' | 'plus' | 'edit' | 'delete' | 'check' | 'x';
@@ -7,10 +9,16 @@ interface User {
   id: number;
   username: string;
   email: string;
-  role: 'admin' | 'editor';
+  department: string;
+  realName: string;
+  phone: string;
+  role: 'admin' | 'sub_admin' | 'editor';
   status: 'active' | 'inactive';
   lastLogin: string;
   createdAt: string;
+  parentId?: number;
+  children?: User[];
+  level: number;
 }
 
 interface Role {
@@ -32,28 +40,105 @@ const UsersManagement: React.FC = () => {
       id: 1,
       username: 'admin',
       email: 'admin@dameng.com',
+      department: '技术部',
+      realName: '张三',
+      phone: '13800138000',
       role: 'admin',
       status: 'active',
       lastLogin: '2024-01-15 10:30:00',
-      createdAt: '2024-01-01 09:00:00'
+      createdAt: '2024-01-01 09:00:00',
+      level: 0,
+      children: [
+        {
+          id: 2,
+          username: 'sub_admin1',
+          email: 'sub_admin1@dameng.com',
+          department: '技术部',
+          realName: '李四',
+          phone: '13800138001',
+          role: 'sub_admin',
+          status: 'active',
+          lastLogin: '2024-01-14 16:45:00',
+          createdAt: '2024-01-05 14:20:00',
+          parentId: 1,
+          level: 1,
+          children: [
+            {
+              id: 3,
+              username: 'editor1',
+              email: 'editor1@dameng.com',
+              department: '技术部',
+              realName: '王五',
+              phone: '13800138002',
+              role: 'editor',
+              status: 'active',
+              lastLogin: '2024-01-10 11:15:00',
+              createdAt: '2024-01-08 10:30:00',
+              parentId: 2,
+              level: 2
+            },
+            {
+              id: 4,
+              username: 'editor2',
+              email: 'editor2@dameng.com',
+              department: '技术部',
+              realName: '赵六',
+              phone: '13800138003',
+              role: 'editor',
+              status: 'inactive',
+              lastLogin: '2024-01-04 12:00:00',
+              createdAt: '2024-01-12 15:30:00',
+              parentId: 2,
+              level: 2
+            }
+          ]
+        }
+      ]
     },
     {
-      id: 2,
-      username: 'editor1',
-      email: 'editor1@dameng.com',
-      role: 'editor',
+      id: 5,
+      username: 'admin2',
+      email: 'admin2@dameng.com',
+      department: '产品部',
+      realName: '孙七',
+      phone: '13800138004',
+      role: 'admin',
       status: 'active',
-      lastLogin: '2024-01-14 16:45:00',
-      createdAt: '2024-01-05 14:20:00'
-    },
-    {
-      id: 3,
-      username: 'editor2',
-      email: 'editor2@dameng.com',
-      role: 'editor',
-      status: 'inactive',
-      lastLogin: '2024-01-10 11:15:00',
-      createdAt: '2024-01-08 10:30:00'
+      lastLogin: '2024-01-05 09:30:00',
+      createdAt: '2024-01-11 11:00:00',
+      level: 0,
+      children: [
+        {
+          id: 6,
+          username: 'sub_admin3',
+          email: 'sub_admin3@dameng.com',
+          department: '产品部',
+          realName: '周八',
+          phone: '13800138005',
+          role: 'sub_admin',
+          status: 'active',
+          lastLogin: '2024-01-06 14:20:00',
+          createdAt: '2024-01-10 16:45:00',
+          parentId: 5,
+          level: 1,
+          children: [
+            {
+              id: 7,
+              username: 'editor4',
+              email: 'editor4@dameng.com',
+              department: '产品部',
+              realName: '吴九',
+              phone: '13800138006',
+              role: 'editor',
+              status: 'active',
+              lastLogin: '2024-01-07 15:30:00',
+              createdAt: '2024-01-12 09:15:00',
+              parentId: 6,
+              level: 2
+            }
+          ]
+        }
+      ]
     }
   ]);
 
@@ -64,6 +149,12 @@ const UsersManagement: React.FC = () => {
       name: '管理员',
       description: '拥有系统所有权限，包括用户管理、文档管理、系统设置等',
       permissions: ['user.manage', 'doc.manage', 'doc.publish', 'doc.delete', 'system.config', 'data.view']
+    },
+    {
+      id: 'sub_admin',
+      name: '子管理员',
+      description: '拥有部分管理权限，包括用户管理、文档管理，但不能修改系统设置',
+      permissions: ['user.manage', 'doc.manage', 'doc.publish', 'doc.delete', 'data.view']
     },
     {
       id: 'editor',
@@ -128,7 +219,120 @@ const UsersManagement: React.FC = () => {
   };
 
   const handleSelectAll = () => {
-    setSelectedUsers(selectedUsers.length === users.length ? [] : users.map(u => u.id));
+    const allUserIds = getAllUserIds(users);
+    setSelectedUsers(selectedUsers.length === allUserIds.length ? [] : allUserIds);
+  };
+
+  // 展开/折叠状态管理
+  const [expandedUsers, setExpandedUsers] = useState<number[]>([1, 5]); // 默认展开顶级用户
+
+  const toggleExpand = (userId: number) => {
+    setExpandedUsers(prev => 
+      prev.includes(userId) 
+        ? prev.filter(id => id !== userId)
+        : [...prev, userId]
+    );
+  };
+
+  // 获取所有用户ID（包括子用户）
+  const getAllUserIds = (userList: User[]): number[] => {
+    let ids: number[] = [];
+    userList.forEach(user => {
+      ids.push(user.id);
+      if (user.children) {
+        ids = ids.concat(getAllUserIds(user.children));
+      }
+    });
+    return ids;
+  };
+
+  // 递归渲染用户行
+  const renderUserRow = (user: User, isExpanded: boolean = true): JSX.Element[] => {
+    const rows: JSX.Element[] = [];
+    const hasChildren = user.children && user.children.length > 0;
+    
+    // 渲染当前用户行
+    rows.push(
+      <div key={user.id} className={`${styles.treeTableRow} ${user.level > 0 ? styles.childRow : ''}`}>
+        <div className={styles.treeTableCell} style={{width: '50px'}}>
+          <input 
+            type="checkbox" 
+            checked={selectedUsers.includes(user.id)}
+            onChange={() => handleSelectUser(user.id)}
+          />
+        </div>
+        <div className={styles.treeTableCell} style={{width: '200px'}}>
+          <div className={styles.userNameCell} style={{ 
+            paddingLeft: `${user.level * 20}px`,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            {hasChildren ? (
+              <button 
+                className={styles.expandButton}
+                onClick={() => toggleExpand(user.id)}
+                style={{
+                  background: 'none',
+                  border: '1px solid #ccc',
+                  cursor: 'pointer',
+                  padding: '2px 6px',
+                  fontSize: '12px',
+                  borderRadius: '3px'
+                }}
+              >
+                {expandedUsers.includes(user.id) ? '▼' : '▶'}
+              </button>
+            ) : (
+              <span style={{ width: '20px', display: 'inline-block' }}></span>
+            )}
+            <span style={{ fontWeight: user.level === 0 ? 'bold' : 'normal' }}>{user.username}</span>
+          </div>
+        </div>
+        <div className={styles.treeTableCell} style={{width: '120px'}}>{user.department}</div>
+        <div className={styles.treeTableCell} style={{width: '100px'}}>{user.realName}</div>
+        <div className={styles.treeTableCell} style={{width: '120px'}}>{user.phone}</div>
+        <div className={styles.treeTableCell} style={{width: '180px'}}>{user.email}</div>
+        <div className={styles.treeTableCell} style={{width: '100px'}}>
+          <span className={`${styles.roleBadge} ${styles[user.role]}`}>
+            {user.role === 'admin' ? '管理员' : user.role === 'sub_admin' ? '下级管理员' : '编辑者'}
+          </span>
+        </div>
+        <div className={styles.treeTableCell} style={{width: '80px'}}>
+          <span className={`${styles.statusBadge} ${styles[user.status]}`}>
+            {user.status === 'active' ? '正常' : '禁用'}
+          </span>
+        </div>
+        <div className={styles.treeTableCell} style={{width: '120px'}}>{user.lastLogin}</div>
+        <div className={styles.treeTableCell} style={{width: '120px'}}>{user.createdAt}</div>
+        <div className={styles.treeTableCell} style={{width: '150px'}}>
+          <div className={styles.actionButtons}>
+            <button 
+              className={styles.iconButton}
+              onClick={() => setShowEditUser(user)}
+              title="编辑"
+            >
+              {renderIcon('edit', '#666')}
+            </button>
+            <button 
+              className={styles.iconButton}
+              title="删除"
+            >
+              {renderIcon('delete', '#f56565')}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+
+    // 如果展开且有子用户，递归渲染子用户
+    if (expandedUsers.includes(user.id) && hasChildren) {
+      user.children!.forEach(child => {
+        rows.push(...renderUserRow(child, true));
+      });
+    }
+
+    return rows;
   };
 
   const renderUsersList = () => (
@@ -146,71 +350,32 @@ const UsersManagement: React.FC = () => {
         </div>
       </div>
       
-      <div className={styles.tableContainer}>
-        <table className={styles.dataTable}>
-          <thead>
-            <tr>
-              <th>
-                <input 
-                  type="checkbox" 
-                  checked={selectedUsers.length === users.length}
-                  onChange={handleSelectAll}
-                />
-              </th>
-              <th>用户名</th>
-              <th>邮箱</th>
-              <th>角色</th>
-              <th>状态</th>
-              <th>最后登录</th>
-              <th>创建时间</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map(user => (
-              <tr key={user.id}>
-                <td>
-                  <input 
-                    type="checkbox" 
-                    checked={selectedUsers.includes(user.id)}
-                    onChange={() => handleSelectUser(user.id)}
-                  />
-                </td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>
-                  <span className={`${styles.roleBadge} ${styles[user.role]}`}>
-                    {user.role === 'admin' ? '管理员' : '编辑发布员'}
-                  </span>
-                </td>
-                <td>
-                  <span className={`${styles.statusBadge} ${styles[user.status]}`}>
-                    {user.status === 'active' ? '激活' : '禁用'}
-                  </span>
-                </td>
-                <td>{user.lastLogin}</td>
-                <td>{user.createdAt}</td>
-                <td>
-                  <div className={styles.actionButtons}>
-                    <button 
-                      className={styles.iconButton}
-                      onClick={() => setShowEditUser(user)}
-                      title="编辑"
-                    >
-                      {renderIcon('edit', '#666')}
-                    </button>
-                    <button 
-                      className={styles.iconButton}
-                      title="删除"
-                    >
-                      {renderIcon('delete', '#f56565')}
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className={styles.treeTableContainer}>
+        {/* 表头 */}
+        <div className={styles.treeTableHeader}>
+          <div className={styles.treeTableHeaderCell} style={{width: '50px'}}>
+            <input 
+              type="checkbox" 
+              checked={selectedUsers.length === users.length}
+              onChange={handleSelectAll}
+            />
+          </div>
+          <div className={styles.treeTableHeaderCell} style={{width: '200px'}}>用户名</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '120px'}}>部门</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '100px'}}>姓名</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '120px'}}>手机号</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '180px'}}>邮箱</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '100px'}}>角色</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '80px'}}>状态</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '120px'}}>最后登录</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '120px'}}>创建时间</div>
+          <div className={styles.treeTableHeaderCell} style={{width: '150px'}}>操作</div>
+        </div>
+        
+        {/* 表体 */}
+        <div className={styles.treeTableBody}>
+          {users.filter(user => user.level === 0).map(user => renderUserRow(user)).flat()}
+        </div>
       </div>
     </div>
   );
@@ -330,39 +495,128 @@ const UsersManagement: React.FC = () => {
   );
 
   return (
-    <div className={styles.mainContent}>
-      {/* 标签页导航 */}
-      <div className={styles.tabsContainer}>
-        <div className={styles.tabs}>
-          <button 
-            className={`${styles.tab} ${activeTab === 'users' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('users')}
-          >
-            {renderIcon('users', activeTab === 'users' ? '#3b82f6' : '#666')}
-            <span>用户列表</span>
-          </button>
-          <button 
-            className={`${styles.tab} ${activeTab === 'roles' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('roles')}
-          >
-            {renderIcon('shield', activeTab === 'roles' ? '#3b82f6' : '#666')}
-            <span>角色管理</span>
-          </button>
-          <button 
-            className={`${styles.tab} ${activeTab === 'permissions' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('permissions')}
-          >
-            {renderIcon('key', activeTab === 'permissions' ? '#3b82f6' : '#666')}
-            <span>权限管理</span>
-          </button>
-        </div>
-      </div>
+    <Layout title="用户管理" description="管理系统用户、角色和权限">
+      <ProtectedRoute requireAdmin={true}>
+        <div className={styles.mainContent}>
+          {/* 页面标题 */}
+          <div className={styles.pageHeader}>
+            <h1 className={styles.pageTitle}>用户管理</h1>
+            <p className={styles.pageDescription}>管理系统用户、角色和权限</p>
+          </div>
 
-      {/* 内容区域 */}
-      {activeTab === 'users' && renderUsersList()}
-      {activeTab === 'roles' && renderRolesList()}
-      {activeTab === 'permissions' && renderPermissions()}
-    </div>
+          {/* 标签页导航 */}
+          <div className={styles.tabsContainer}>
+            <div className={styles.tabs}>
+              <button 
+                className={`${styles.tab} ${activeTab === 'users' ? styles.tabActive : ''}`}
+                onClick={() => setActiveTab('users')}
+              >
+                {renderIcon('users', activeTab === 'users' ? '#3b82f6' : '#666')}
+                <span>用户列表</span>
+              </button>
+              <button 
+                className={`${styles.tab} ${activeTab === 'roles' ? styles.tabActive : ''}`}
+                onClick={() => setActiveTab('roles')}
+              >
+                {renderIcon('shield', activeTab === 'roles' ? '#3b82f6' : '#666')}
+                <span>角色管理</span>
+              </button>
+              <button 
+                className={`${styles.tab} ${activeTab === 'permissions' ? styles.tabActive : ''}`}
+                onClick={() => setActiveTab('permissions')}
+              >
+                {renderIcon('key', activeTab === 'permissions' ? '#3b82f6' : '#666')}
+                <span>权限管理</span>
+              </button>
+            </div>
+          </div>
+
+          {/* 内容区域 */}
+          {activeTab === 'users' && renderUsersList()}
+          {activeTab === 'roles' && renderRolesList()}
+          {activeTab === 'permissions' && renderPermissions()}
+        </div>
+
+        {/* 添加用户弹窗 */}
+        {showAddUser && (
+          <div className={styles.modalOverlay} onClick={() => setShowAddUser(false)}>
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+              <div className={styles.modalHeader}>
+                <h3>添加用户</h3>
+                <button 
+                  className={styles.closeButton}
+                  onClick={() => setShowAddUser(false)}
+                >
+                  {renderIcon('x', '#666')}
+                </button>
+              </div>
+              <div className={styles.modalBody}>
+                <div className={styles.formGroup}>
+                  <label>用户名</label>
+                  <input type="text" className={styles.formInput} placeholder="请输入用户名" />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>邮箱</label>
+                  <input type="email" className={styles.formInput} placeholder="请输入邮箱" />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>真实姓名</label>
+                  <input type="text" className={styles.formInput} placeholder="请输入真实姓名" />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>手机号</label>
+                  <input type="tel" className={styles.formInput} placeholder="请输入手机号" />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>部门</label>
+                  <select className={styles.formSelect}>
+                    <option value="">请选择部门</option>
+                    <option value="技术部">技术部</option>
+                    <option value="产品部">产品部</option>
+                    <option value="运营部">运营部</option>
+                  </select>
+                </div>
+                <div className={styles.formGroup}>
+                  <label>角色</label>
+                  <select className={styles.formSelect}>
+                    <option value="">请选择角色</option>
+                    <option value="admin">管理员</option>
+                    <option value="sub_admin">子管理员</option>
+                    <option value="editor">编辑者</option>
+                  </select>
+                </div>
+                <div className={styles.formGroup}>
+                  <label>上级用户</label>
+                  <select className={styles.formSelect}>
+                    <option value="">请选择上级用户（可选）</option>
+                    <option value="1">admin - 张三</option>
+                    <option value="5">admin2 - 孙七</option>
+                  </select>
+                </div>
+              </div>
+              <div className={styles.modalFooter}>
+                <button 
+                  className={styles.secondaryButton}
+                  onClick={() => setShowAddUser(false)}
+                >
+                  取消
+                </button>
+                <button 
+                  className={styles.primaryButton}
+                  onClick={() => {
+                    // TODO: 实现添加用户逻辑
+                    console.log('添加用户');
+                    setShowAddUser(false);
+                  }}
+                >
+                  确认添加
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </ProtectedRoute>
+    </Layout>
   );
 };
 

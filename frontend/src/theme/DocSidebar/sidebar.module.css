@@ -1,0 +1,426 @@
+/* DocSidebar 自定义样式 */
+.sidebarWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 版本选择器容器 */
+.versionSelectorContainer {
+  padding: 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-color-emphasis-100);
+  flex-shrink: 0;
+}
+
+/* 侧边栏版本选择器样式 */
+.sidebarVersionSelector {
+  width: 100%;
+}
+
+/* 原始侧边栏内容 */
+.originalSidebar {
+  flex: 1;
+  overflow: auto;
+  padding-bottom: 80px; /* 为底部按钮留出空间 */
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .versionSelectorContainer {
+  background: var(--ifm-color-emphasis-200);
+  border-bottom-color: var(--ifm-color-emphasis-400);
+}
+
+/* PDF下载按钮容器 */
+.pdfDownloadContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: var(--ifm-color-emphasis-50);
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  z-index: 10;
+}
+
+/* PDF下载按钮 */
+.pdfDownloadButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.2);
+}
+
+.pdfDownloadButton:hover {
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+}
+
+.pdfDownloadButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.2);
+}
+
+/* 下载图标 */
+.downloadIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* 暗色主题适配 */
+[data-theme='dark'] .pdfDownloadContainer {
+  background: var(--ifm-color-emphasis-200);
+  border-bottom-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .pdfDownloadButton {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+}
+
+[data-theme='dark'] .pdfDownloadButton:hover {
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+/* 下载弹窗样式 */
+.downloadModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15), 0 10px 10px -5px rgba(59, 130, 246, 0.08);
+  max-width: 480px;
+  width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dbeafe;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #e0f2fe;
+  background: linear-gradient(135deg, #f8faff 0%, #f0f9ff 100%);
+}
+
+.modalHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: #e0f2fe;
+  color: #1e40af;
+}
+
+.closeButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.modalBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 24px;
+}
+
+.selectAllContainer {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0f2fe;
+  margin-bottom: 16px;
+  background: #f8faff;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  cursor: pointer;
+  accent-color: #3b82f6;
+}
+
+.checkboxText {
+  font-size: 14px;
+}
+
+.chapterList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chapterItem {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e0f2fe;
+  background: #ffffff;
+}
+
+.chapterItem:hover {
+  background-color: #f0f9ff;
+  border-color: #bfdbfe;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+.chapterInfo {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chapterName {
+  font-size: 14px;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.chapterSize {
+  font-size: 12px;
+  color: #3b82f6;
+  background-color: #dbeafe;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.modalFooter {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #e0f2fe;
+  background: linear-gradient(135deg, #f8faff 0%, #f0f9ff 100%);
+}
+
+.cancelButton {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid #bfdbfe;
+  background: #ffffff;
+  color: #374151;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: #f0f9ff;
+  border-color: #93c5fd;
+  color: #1e40af;
+}
+
+.downloadButton {
+  flex: 1;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #1e90ff 0%, #0066cc 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.downloadButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3);
+}
+
+.downloadButton:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 暗色主题适配 - 保持白底蓝色系 */
+[data-theme='dark'] .modalContent {
+  background: #ffffff;
+  border-color: #dbeafe;
+}
+
+[data-theme='dark'] .modalHeader {
+  background: linear-gradient(135deg, #f8faff 0%, #f0f9ff 100%);
+  border-bottom-color: #e0f2fe;
+}
+
+[data-theme='dark'] .modalHeader h3 {
+  color: #1e40af;
+}
+
+[data-theme='dark'] .closeButton {
+  color: #64748b;
+}
+
+[data-theme='dark'] .closeButton:hover {
+  background-color: #e0f2fe;
+  color: #1e40af;
+}
+
+[data-theme='dark'] .selectAllContainer {
+  background: #f8faff;
+  border-bottom-color: #e0f2fe;
+}
+
+[data-theme='dark'] .checkboxLabel {
+  color: #1e40af;
+}
+
+[data-theme='dark'] .chapterItem {
+  background: #ffffff;
+  border-color: #e0f2fe;
+}
+
+[data-theme='dark'] .chapterItem:hover {
+  background-color: #f0f9ff;
+  border-color: #bfdbfe;
+}
+
+[data-theme='dark'] .chapterName {
+  color: #1f2937;
+}
+
+[data-theme='dark'] .chapterSize {
+  background-color: #dbeafe;
+  color: #3b82f6;
+}
+
+[data-theme='dark'] .modalFooter {
+  background: linear-gradient(135deg, #f8faff 0%, #f0f9ff 100%);
+  border-top-color: #e0f2fe;
+}
+
+[data-theme='dark'] .cancelButton {
+  background: #ffffff;
+  border-color: #bfdbfe;
+  color: #374151;
+}
+
+[data-theme='dark'] .cancelButton:hover {
+  background-color: #f0f9ff;
+  border-color: #93c5fd;
+  color: #1e40af;
+}
+
+/* 移动端适配 */
+@media (max-width: 996px) {
+  .versionSelectorContainer {
+    padding: 0.75rem;
+  }
+  
+  .pdfDownloadContainer {
+    padding: 0.75rem;
+  }
+  
+  .pdfDownloadButton {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .downloadIcon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .modalContent {
+    width: 95vw;
+    max-height: 85vh;
+  }
+  
+  .modalHeader,
+  .modalBody,
+  .modalFooter {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .modalFooter {
+    flex-direction: column;
+  }
+  
+  .cancelButton,
+  .downloadButton {
+    flex: none;
+  }
+}

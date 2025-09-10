@@ -95,9 +95,9 @@
   right: 0;
   z-index: 1000;
   background: white;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #1677ff;
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 60px rgba(22, 119, 255, 0.15), 0 8px 30px rgba(22, 119, 255, 0.1);
   margin-top: 0.5rem;
   max-height: 500px;
   overflow: hidden;
@@ -120,9 +120,9 @@
   padding: 1rem 1.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #64748b;
-  border-bottom: 1px solid #f1f5f9;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  color: #1677ff;
+  border-bottom: 1px solid #1677ff;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
 }
 
 /* 结果列表 */
@@ -161,8 +161,8 @@
 
 .resultItem:hover,
 .resultItem.selected {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-left: 4px solid #3b82f6;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
+  border-left: 4px solid #1677ff;
   padding-left: calc(1.25rem - 4px);
 }
 
@@ -189,6 +189,11 @@
   color: #1e293b;
   margin-bottom: 0.5rem;
   line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+.resultItem:hover .resultTitle {
+  color: #1677ff;
 }
 
 .resultSnippet {
@@ -228,8 +233,8 @@
 
 .tag {
   font-size: 0.75rem;
-  color: #3b82f6;
-  background: #eff6ff;
+  color: #1677ff;
+  background: #e6f4ff;
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
   font-weight: 500;
@@ -346,99 +351,100 @@
   }
 }
 
-/* 暗色主题适配 */
+/* 暗色主题适配 - 白底蓝色系 */
 [data-theme='dark'] .inputContainer {
-  background: #1e293b;
-  border-color: #334155;
+  background: #ffffff;
+  border-color: #2563eb;
 }
 
 [data-theme='dark'] .inputContainer:focus-within {
-  border-color: #60a5fa;
-  box-shadow: 0 8px 30px rgba(96, 165, 250, 0.2);
+  border-color: #2563eb;
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
 }
 
 [data-theme='dark'] .input {
-  color: #f1f5f9;
+  color: #1a1a1a;
 }
 
 [data-theme='dark'] .input::placeholder {
-  color: #64748b;
+  color: #666666;
 }
 
 [data-theme='dark'] .searchIcon {
-  color: #94a3b8;
+  color: #666666;
 }
 
 [data-theme='dark'] .clearButton {
-  color: #94a3b8;
+  color: #666666;
 }
 
 [data-theme='dark'] .clearButton:hover {
-  background: #334155;
-  color: #f1f5f9;
+  background: #f0f8ff;
+  color: #2563eb;
 }
 
 [data-theme='dark'] .resultsContainer {
-  background: #1e293b;
-  border-color: #334155;
+  background: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
 }
 
 [data-theme='dark'] .resultsHeader {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  color: #94a3b8;
-  border-bottom-color: #334155;
+  background: #f8fafc;
+  color: #2563eb;
+  border-bottom-color: #2563eb;
 }
 
 [data-theme='dark'] .resultItem {
-  border-bottom-color: #334155;
+  border-bottom-color: #e2e8f0;
 }
 
 [data-theme='dark'] .resultItem:hover,
 [data-theme='dark'] .resultItem.selected {
-  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
-  border-left-color: #60a5fa;
+  background: #f0f8ff;
+  border-left-color: #2563eb;
 }
 
 [data-theme='dark'] .resultTitle {
-  color: #f1f5f9;
+  color: #1a1a1a;
 }
 
 [data-theme='dark'] .resultSnippet {
-  color: #94a3b8;
+  color: #666666;
 }
 
 [data-theme='dark'] .category {
-  background: #334155;
-  color: #94a3b8;
+  background: #f0f8ff;
+  color: #2563eb;
 }
 
 [data-theme='dark'] .tag {
-  background: #1e40af;
-  color: #93c5fd;
+  background: #e0f2fe;
+  color: #2563eb;
 }
 
 [data-theme='dark'] .resultScore {
-  background: #334155;
-  color: #94a3b8;
+  background: #f8fafc;
+  color: #666666;
 }
 
 [data-theme='dark'] .highlight {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #1f2937;
+  background: #2563eb;
+  color: #ffffff;
 }
 
 [data-theme='dark'] .loadingState {
-  color: #94a3b8;
+  color: #666666;
 }
 
 [data-theme='dark'] .noResultsText {
-  color: #f1f5f9;
+  color: #666666;
 }
 
 [data-theme='dark'] .noResultsTips p {
-  color: #94a3b8;
+  color: #666666;
 }
 
 [data-theme='dark'] .noResultsTips li {
-  color: #94a3b8;
+  color: #666666;
 }

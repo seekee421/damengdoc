@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import styles from '../index.module.css';
+import React, { useState, useMemo, useCallback } from 'react';
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import styles from './index.module.css';
+
+// 拖拽项目类型
+const ItemTypes = {
+  DOC_ITEM: 'doc_item'
+};
 
 interface DocItem {
   id: number;
@@ -24,12 +31,23 @@ interface DocVersion {
 const DocsManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState('list');
   const [selectedDocs, setSelectedDocs] = useState<number[]>([]);
-  const [expandedFolders, setExpandedFolders] = useState<number[]>([1]);
+  const [expandedFolders, setExpandedFolders] = useState<Set<number>>(new Set([1, 4])); // 默认展开根目录文件夹
   const [viewMode, setViewMode] = useState<'list' | 'tree'>('list');
   const [selectedDoc, setSelectedDoc] = useState<DocItem | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [breadcrumbs, setBreadcrumbs] = useState<DocItem[]>([]);
+  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+  const [filters, setFilters] = useState({
+    status: 'all',
+    author: 'all',
+    fileType: 'all',
+    dateRange: 'all'
+  });
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [dropTarget, setDropTarget] = useState(null);
 
   // 模拟文档数据
-  const [docs] = useState<DocItem[]>([
+  const [docs, setDocs] = useState<DocItem[]>([
     {
       id: 1,
       title: '产品文档',
@@ -186,11 +204,15 @@ const DocsManagement: React.FC = () => {
   };
 
   const toggleFolder = (folderId: number) => {
-    setExpandedFolders(prev => 
-      prev.includes(folderId) 
-        ? prev.filter(id => id !== folderId)
-        : [...prev, folderId]
-    );
+    setExpandedFolders(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(folderId)) {
+        newSet.delete(folderId);
+      } else {
+        newSet.add(folderId);
+      }
+      return newSet;
+    });
   };
 
   const handleSelectDoc = (docId: number) => {
@@ -199,6 +221,18 @@ const DocsManagement: React.FC = () => {
         ? prev.filter(id => id !== docId)
         : [...prev, docId]
     );
+  };
+
+  const handleSelectAll = () => {
+    const allFileIds = getAllDocs(filteredDocs)
+      .filter(doc => doc.type === 'file')
+      .map(doc => doc.id);
+    
+    if (selectedDocs.length === allFileIds.length) {
+      setSelectedDocs([]);
+    } else {
+      setSelectedDocs(allFileIds);
+    }
   };
 
   const getAllDocs = (items: DocItem[]): DocItem[] => {
@@ -212,40 +246,282 @@ const DocsManagement: React.FC = () => {
     return result;
   };
 
+  const filteredDocs = useMemo(() => {
+    const filterItems = (items: DocItem[]): DocItem[] => {
+      return items.filter(item => {
+        // 文本搜索匹配
+        const matchesSearch = !searchTerm || 
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.path.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.author.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        // 状态过滤
+        const matchesStatus = filters.status === 'all' || item.status === filters.status;
+        
+        // 作者过滤
+        const matchesAuthor = filters.author === 'all' || item.author === filters.author;
+        
+        // 文件类型过滤
+        const matchesFileType = filters.fileType === 'all' || 
+          (filters.fileType === 'folder' && item.type === 'folder') ||
+          (filters.fileType === 'markdown' && item.type === 'file' && item.path.endsWith('.md')) ||
+          (filters.fileType === 'other' && item.type === 'file' && !item.path.endsWith('.md'));
+        
+        // 日期范围过滤
+        const matchesDateRange = filters.dateRange === 'all' || checkDateRange(item.lastModified, filters.dateRange);
+        
+        // 对于文件夹，检查是否有匹配的子项
+        if (item.children) {
+          const filteredChildren = filterItems(item.children);
+          const hasMatchingChildren = filteredChildren.length > 0;
+          return (matchesSearch && matchesStatus && matchesAuthor && matchesFileType && matchesDateRange) || hasMatchingChildren;
+        }
+        
+        return matchesSearch && matchesStatus && matchesAuthor && matchesFileType && matchesDateRange;
+      }).map(item => {
+        if (item.children) {
+          return {
+            ...item,
+            children: filterItems(item.children)
+          };
+        }
+        return item;
+      });
+    };
+    
+    return filterItems(docs);
+  }, [docs, searchTerm, filters]);
+
+  // 日期范围检查函数
+  const checkDateRange = (dateStr: string, range: string): boolean => {
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+    
+    switch (range) {
+      case 'today':
+        return diffDays === 0;
+      case 'week':
+        return diffDays <= 7;
+      case 'month':
+        return diffDays <= 30;
+      case 'quarter':
+        return diffDays <= 90;
+      default:
+        return true;
+    }
+  };
+
+  // 拖拽处理函数
+  const moveDocItem = useCallback((draggedId: number, targetId: number, position: 'before' | 'after') => {
+    setDocs(prevDocs => {
+      const newDocs = [...prevDocs];
+      
+      // 递归查找并移动项目
+      const findAndMove = (items: DocItem[], draggedId: number, targetId: number, position: 'before' | 'after') => {
+        let draggedItem: DocItem | null = null;
+        let draggedIndex = -1;
+        let targetIndex = -1;
+        
+        // 查找拖拽项和目标项
+        const findItems = (arr: DocItem[], parentIndex = -1) => {
+          arr.forEach((item, index) => {
+            if (item.id === draggedId) {
+              draggedItem = item;
+              draggedIndex = parentIndex === -1 ? index : parentIndex;
+            }
+            if (item.id === targetId) {
+              targetIndex = parentIndex === -1 ? index : parentIndex;
+            }
+            if (item.children) {
+              findItems(item.children, parentIndex === -1 ? index : parentIndex);
+            }
+          });
+        };
+        
+        findItems(items);
+        
+        if (draggedItem && draggedIndex !== -1 && targetIndex !== -1) {
+          // 移除拖拽项
+          items.splice(draggedIndex, 1);
+          
+          // 调整目标索引
+          if (draggedIndex < targetIndex) {
+            targetIndex--;
+          }
+          
+          // 插入到新位置
+          const insertIndex = position === 'before' ? targetIndex : targetIndex + 1;
+          items.splice(insertIndex, 0, draggedItem);
+        }
+        
+        return items;
+      };
+      
+      return findAndMove(newDocs, draggedId, targetId, position);
+    });
+  }, []);
+
+  const handleDragStart = useCallback((item: DocItem) => {
+    setDraggedItem(item);
+  }, []);
+
+  const handleDragEnd = useCallback(() => {
+    setDraggedItem(null);
+    setDropTarget(null);
+  }, []);
+
+  const handleDrop = useCallback((targetItem: DocItem, position: 'before' | 'after') => {
+    if (draggedItem && draggedItem.id !== targetItem.id) {
+      moveDocItem(draggedItem.id, targetItem.id, position);
+    }
+    handleDragEnd();
+  }, [draggedItem, moveDocItem, handleDragEnd]);
+
+  // 高亮搜索关键词
+  const highlightText = (text: string, searchTerm: string) => {
+    if (!searchTerm || !text) return text;
+    
+    const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    const parts = text.split(regex);
+    
+    return parts.map((part, index) => 
+      regex.test(part) ? (
+        <span key={index} className={styles.highlight}>{part}</span>
+      ) : part
+    );
+  };
+
+  // 获取搜索结果统计
+  const getSearchStats = () => {
+    const allFilteredDocs = getAllDocs(filteredDocs);
+    const totalFiles = allFilteredDocs.filter(doc => doc.type === 'file').length;
+    const totalFolders = allFilteredDocs.filter(doc => doc.type === 'folder').length;
+    return { totalFiles, totalFolders, total: totalFiles + totalFolders };
+  };
+
+  const searchStats = getSearchStats();
+
+  // 可拖拽的树形项目组件
+  const DraggableTreeItem = ({ item, level = 0 }) => {
+    const [{ isDragging }, drag] = useDrag(() => ({
+      type: ItemTypes.DOC_ITEM,
+      item: { id: item.id, type: item.type, title: item.title },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }));
+
+    const [{ isOver, dropPosition }, drop] = useDrop(() => ({
+      accept: ItemTypes.DOC_ITEM,
+      drop: (draggedItem: any, monitor) => {
+        if (!monitor.didDrop()) {
+          moveDocItem(draggedItem.id, item.id, 'after');
+        }
+      },
+      collect: (monitor) => ({
+        isOver: monitor.isOver(),
+        dropPosition: null,
+      })
+    }));
+
+    const ref = (node) => {
+      drag(drop(node));
+    };
+
+    return (
+      <div
+        ref={ref}
+        className={`${styles.treeItem} ${
+          isDragging ? styles.dragging : ''
+        } ${
+          isOver ? styles.dropZone : ''
+        }`}
+        style={{ paddingLeft: `${level * 20 + 16}px` }}
+      >
+        {isOver && dropPosition === 'before' && (
+          <div className={styles.dropIndicator} />
+        )}
+        
+        <div className={styles.treeItemContent}>
+          {item.type === 'folder' && (
+            <div 
+              className={styles.treeToggle}
+              onClick={() => toggleFolder(item.id)}
+            >
+              {expandedFolders.has(item.id) ? (
+                renderIcon('chevron-down', '#666')
+              ) : (
+                renderIcon('chevron-right', '#666')
+              )}
+            </div>
+          )}
+          
+          <div className={styles.treeIcon}>
+            {renderIcon(
+              item.type === 'folder' ? 'folder' : 'file',
+              item.type === 'folder' ? '#fbbf24' : '#6b7280'
+            )}
+          </div>
+          
+          <span className={styles.treeLabel}>
+            {highlightText(item.title, searchTerm)}
+          </span>
+          
+          {item.status && (
+            <span className={`${styles.statusBadge} ${styles[item.status]}`}>
+              {item.status === 'published' ? '已发布' : 
+               item.status === 'draft' ? '草稿' : '已归档'}
+            </span>
+          )}
+        </div>
+        
+        <div className={styles.treeActions}>
+          <button 
+            className={styles.iconButton}
+            onClick={() => handleDocClick(item)}
+            title="编辑"
+          >
+            {renderIcon('edit', '#666')}
+          </button>
+          <button 
+            className={styles.iconButton}
+            onClick={() => console.log('删除', item.id)}
+            title="删除"
+          >
+            {renderIcon('delete', '#f56565')}
+          </button>
+        </div>
+        
+        {isOver && dropPosition === 'after' && (
+          <div className={styles.dropIndicator} />
+        )}
+      </div>
+    );
+  };
+
+  const handleDocClick = (doc: DocItem) => {
+    if (doc.type === 'folder') {
+      toggleFolder(doc.id);
+      // Update breadcrumbs for folder navigation
+      const newBreadcrumbs = [...breadcrumbs, doc];
+      setBreadcrumbs(newBreadcrumbs);
+    } else {
+      setSelectedDoc(doc);
+    }
+  };
+
+  const navigateToBreadcrumb = (index: number) => {
+    setBreadcrumbs(breadcrumbs.slice(0, index + 1));
+  };
+
   const renderTreeItem = (item: DocItem, level = 0) => {
-    const isExpanded = expandedFolders.includes(item.id);
+    const isExpanded = expandedFolders.has(item.id);
     const hasChildren = item.children && item.children.length > 0;
     
     return (
       <div key={item.id}>
-        <div 
-          className={styles.treeItem}
-          style={{ paddingLeft: `${level * 20 + 12}px` }}
-          onClick={() => item.type === 'folder' && toggleFolder(item.id)}
-        >
-          <div className={styles.treeItemContent}>
-            {item.type === 'folder' && (
-              <span className={styles.treeToggle}>
-                {hasChildren && renderIcon(isExpanded ? 'chevron-down' : 'chevron-right', '#666')}
-              </span>
-            )}
-            <span className={styles.treeIcon}>
-              {renderIcon(item.type, item.type === 'folder' ? '#f59e0b' : '#6b7280')}
-            </span>
-            <span className={styles.treeLabel}>{item.title}</span>
-            <span className={`${styles.statusBadge} ${styles[item.status]}`}>
-              {item.status === 'published' ? '已发布' : item.status === 'draft' ? '草稿' : '已归档'}
-            </span>
-          </div>
-          <div className={styles.treeActions}>
-            <button className={styles.iconButton} title="编辑">
-              {renderIcon('edit', '#666')}
-            </button>
-            <button className={styles.iconButton} title="删除">
-              {renderIcon('delete', '#f56565')}
-            </button>
-          </div>
-        </div>
+        <DraggableTreeItem item={item} level={level} />
         {item.type === 'folder' && hasChildren && isExpanded && (
           <div>
             {item.children!.map(child => renderTreeItem(child, level + 1))}
@@ -262,6 +538,113 @@ const DocsManagement: React.FC = () => {
       <div className={styles.contentCard}>
         <div className={styles.contentCardHeader}>
           <h3 className={styles.contentCardTitle}>文档列表</h3>
+          <div className={styles.searchContainer}>
+            <div className={styles.searchInputGroup}>
+              <input
+                type="text"
+                placeholder="搜索文档..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={styles.searchInput}
+              />
+              <button 
+                className={`${styles.searchToggle} ${showAdvancedSearch ? styles.active : ''}`}
+                onClick={() => setShowAdvancedSearch(!showAdvancedSearch)}
+                title="高级搜索"
+              >
+                {renderIcon('filter', showAdvancedSearch ? '#3b82f6' : '#666')}
+              </button>
+            </div>
+            
+            {showAdvancedSearch && (
+              <div className={styles.advancedSearch}>
+                <div className={styles.filterRow}>
+                  <div className={styles.filterGroup}>
+                    <label>状态</label>
+                    <select 
+                      value={filters.status} 
+                      onChange={(e) => setFilters({...filters, status: e.target.value})}
+                      className={styles.filterSelect}
+                    >
+                      <option value="all">全部状态</option>
+                      <option value="published">已发布</option>
+                      <option value="draft">草稿</option>
+                      <option value="archived">已归档</option>
+                    </select>
+                  </div>
+                  
+                  <div className={styles.filterGroup}>
+                    <label>作者</label>
+                    <select 
+                      value={filters.author} 
+                      onChange={(e) => setFilters({...filters, author: e.target.value})}
+                      className={styles.filterSelect}
+                    >
+                      <option value="all">全部作者</option>
+                      <option value="admin">admin</option>
+                      <option value="editor1">editor1</option>
+                      <option value="editor2">editor2</option>
+                    </select>
+                  </div>
+                  
+                  <div className={styles.filterGroup}>
+                    <label>文件类型</label>
+                    <select 
+                      value={filters.fileType} 
+                      onChange={(e) => setFilters({...filters, fileType: e.target.value})}
+                      className={styles.filterSelect}
+                    >
+                      <option value="all">全部类型</option>
+                      <option value="folder">文件夹</option>
+                      <option value="markdown">Markdown</option>
+                      <option value="other">其他文件</option>
+                    </select>
+                  </div>
+                  
+                  <div className={styles.filterGroup}>
+                    <label>修改时间</label>
+                    <select 
+                      value={filters.dateRange} 
+                      onChange={(e) => setFilters({...filters, dateRange: e.target.value})}
+                      className={styles.filterSelect}
+                    >
+                      <option value="all">全部时间</option>
+                      <option value="today">今天</option>
+                      <option value="week">最近一周</option>
+                      <option value="month">最近一月</option>
+                      <option value="quarter">最近三月</option>
+                    </select>
+                  </div>
+                  
+                  <button 
+                    className={styles.clearFilters}
+                    onClick={() => {
+                      setFilters({
+                        status: 'all',
+                        author: 'all',
+                        fileType: 'all',
+                        dateRange: 'all'
+                      });
+                      setSearchTerm('');
+                    }}
+                  >
+                    清除筛选
+                  </button>
+                </div>
+              </div>
+            )}
+             
+             {(searchTerm || Object.values(filters).some(f => f !== 'all')) && (
+               <div className={styles.searchStats}>
+                 <span className={styles.statsText}>
+                   找到 {searchStats.total} 项结果
+                   {searchStats.totalFiles > 0 && ` (${searchStats.totalFiles} 个文件`}
+                   {searchStats.totalFolders > 0 && `, ${searchStats.totalFolders} 个文件夹)`}
+                   {searchStats.totalFiles > 0 && searchStats.totalFolders === 0 && ')'}
+                 </span>
+               </div>
+             )}
+          </div>
           <div className={styles.headerActions}>
             <div className={styles.viewToggle}>
               <button 
@@ -290,13 +673,39 @@ const DocsManagement: React.FC = () => {
           </div>
         </div>
         
+        {breadcrumbs.length > 0 && (
+          <div className={styles.breadcrumbContainer}>
+            <button 
+              className={styles.breadcrumbItem}
+              onClick={() => setBreadcrumbs([])}
+            >
+              根目录
+            </button>
+            {breadcrumbs.map((crumb, index) => (
+              <React.Fragment key={crumb.id}>
+                {renderIcon('chevron-right', '#9ca3af')}
+                <button 
+                  className={styles.breadcrumbItem}
+                  onClick={() => navigateToBreadcrumb(index)}
+                >
+                  {crumb.title}
+                </button>
+              </React.Fragment>
+            ))}
+          </div>
+        )}
+        
         {viewMode === 'list' ? (
           <div className={styles.tableContainer}>
             <table className={styles.dataTable}>
               <thead>
                 <tr>
                   <th>
-                    <input type="checkbox" />
+                    <input 
+                      type="checkbox" 
+                      checked={selectedDocs.length > 0 && selectedDocs.length === getAllDocs(filteredDocs).filter(doc => doc.type === 'file').length}
+                      onChange={handleSelectAll}
+                    />
                   </th>
                   <th>文档名称</th>
                   <th>路径</th>
@@ -308,7 +717,7 @@ const DocsManagement: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {allDocs.map(doc => (
+                {getAllDocs(filteredDocs).filter(doc => doc.type === 'file').map(doc => (
                   <tr key={doc.id}>
                     <td>
                       <input 
@@ -320,7 +729,7 @@ const DocsManagement: React.FC = () => {
                     <td>
                       <div className={styles.docName}>
                         {renderIcon('file', '#6b7280')}
-                        <span>{doc.title}</span>
+                        <span>{highlightText(doc.title, searchTerm)}</span>
                       </div>
                     </td>
                     <td className={styles.docPath}>{doc.path}</td>
@@ -352,7 +761,7 @@ const DocsManagement: React.FC = () => {
           </div>
         ) : (
           <div className={styles.treeContainer}>
-            {docs.map(item => renderTreeItem(item))}
+            {filteredDocs.map(item => renderTreeItem(item))}
           </div>
         )}
       </div>
@@ -443,7 +852,8 @@ const DocsManagement: React.FC = () => {
   );
 
   return (
-    <div className={styles.mainContent}>
+    <DndProvider backend={HTML5Backend}>
+      <div className={styles.mainContent}>
       {/* 标签页导航 */}
       <div className={styles.tabsContainer}>
         <div className={styles.tabs}>
@@ -475,7 +885,8 @@ const DocsManagement: React.FC = () => {
       {activeTab === 'list' && renderDocsList()}
       {activeTab === 'versions' && renderVersionHistory()}
       {activeTab === 'import-export' && renderImportExport()}
-    </div>
+      </div>
+    </DndProvider>
   );
 };
 

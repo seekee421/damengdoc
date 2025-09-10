@@ -6,6 +6,7 @@ import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import GlobalSearch from '@site/src/components/Search/GlobalSearch';
 
+
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -35,6 +36,7 @@ function HomepageHeader() {
                 to="/docs/intro">
                 快速入门
               </Link>
+
             </div>
           </div>
           <div className={styles.heroRight}>

@@ -14,7 +14,43 @@
 
 .versionSelector.sidebar {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 0;
+}
+
+/* 侧边栏版本按钮样式 */
+.versionSelector.sidebar .versionButton {
+  width: 100%;
+  min-width: auto;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  height: auto;
+  min-height: 36px;
+}
+
+.versionSelector.sidebar .versionButton:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
+}
+
+/* 侧边栏版本名称样式 */
+.versionSelector.sidebar .versionName {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* 侧边栏版本标签样式 */
+.versionSelector.sidebar .latestBadge {
+  font-size: 9px;
+  padding: 1px 6px;
+}
+
+.versionSelector.sidebar .ltsBadge,
+.versionSelector.sidebar .deprecatedBadge {
+  font-size: 9px;
+  padding: 1px 5px;
 }
 
 .versionSelector.inline {
@@ -135,9 +171,9 @@
 .versionDropdown {
   position: fixed;
   background: #ffffff !important;
-  border: 1px solid #d9d9d9;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #1677ff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.15), 0 2px 8px rgba(22, 119, 255, 0.1);
   z-index: 99999;
   overflow: hidden;
   min-width: 320px;
@@ -155,11 +191,11 @@
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  background: var(--ifm-color-emphasis-100);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
+  border-bottom: 1px solid #1677ff;
   font-weight: 600;
   font-size: 13px;
-  color: var(--ifm-color-content-secondary);
+  color: #1677ff;
 }
 
 .headerIcon {
@@ -177,7 +213,7 @@
   padding: 12px 16px;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e6f4ff;
   min-height: 48px;
   display: flex;
   flex-direction: column;
@@ -187,8 +223,8 @@
 }
 
 .versionItem:hover {
-  background: #f5f5f5 !important;
-  color: #262626 !important;
+  background: #f0f8ff !important;
+  color: #1677ff !important;
 }
 
 .versionItem.selected {
@@ -196,6 +232,7 @@
   color: #1677ff !important;
   border-left: 3px solid #1677ff;
   padding-left: 13px;
+  font-weight: 600;
 }
 
 .versionItem.selected:hover {
@@ -306,8 +343,8 @@
 /* 下拉列表底部 */
 .dropdownFooter {
   padding: 12px 16px;
-  background: var(--ifm-color-emphasis-100);
-  border-top: 1px solid var(--ifm-color-emphasis-200);
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
+  border-top: 1px solid #1677ff;
 }
 
 .versionHistoryLink {
@@ -403,47 +440,49 @@
 }
 
 [data-theme='dark'] .versionDropdown {
-  background: #141414;
-  border-color: #424242;
-  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.32), 0 3px 6px -4px rgba(0, 0, 0, 0.32), 0 9px 28px 8px rgba(0, 0, 0, 0.2);
+  background: #ffffff !important;
+  border-color: #1677ff;
+  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.15), 0 2px 8px rgba(22, 119, 255, 0.1);
 }
 
 [data-theme='dark'] .dropdownHeader {
-  background: #1f1f1f;
-  border-bottom-color: #424242;
-  color: rgba(255, 255, 255, 0.65);
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
+  border-bottom-color: #1677ff;
+  color: #1677ff;
 }
 
 [data-theme='dark'] .versionItem {
-  color: rgba(255, 255, 255, 0.85);
+  background: #ffffff !important;
+  color: #262626;
+  border-bottom-color: #e6f4ff;
 }
 
 [data-theme='dark'] .versionItem:hover {
-  background: #262626;
-  color: rgba(255, 255, 255, 0.85);
+  background: #f0f8ff !important;
+  color: #1677ff;
 }
 
 [data-theme='dark'] .versionItem.selected {
-  background: #111b26;
+  background: #e6f4ff !important;
   color: #1677ff;
   font-weight: 600;
 }
 
 [data-theme='dark'] .versionItemName {
-  color: rgba(255, 255, 255, 0.85);
+  color: #262626;
 }
 
 [data-theme='dark'] .versionDescription {
-  color: rgba(255, 255, 255, 0.65);
+  color: #666666;
 }
 
 [data-theme='dark'] .versionMeta {
-  color: rgba(255, 255, 255, 0.45);
+  color: #999999;
 }
 
 [data-theme='dark'] .dropdownFooter {
-  background: #1f1f1f;
-  border-top-color: #424242;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f4ff 100%);
+  border-top-color: #1677ff;
 }
 
 /* 滚动条样式 */
